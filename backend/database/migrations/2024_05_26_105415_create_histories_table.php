@@ -14,9 +14,8 @@ return new class extends Migration
             $table->string('name_crypto', 40);
             $table->string('slug_crypto', 40);
             $table->bigInteger('price')->unsigned()->nullable();
-            $table->date('date');
+            $table->dateTime('date');
             $table->bigInteger('m_cap')->unsigned()->nullable();
-            $table->timestamps();
 
             // definizione degli index
             $table->index(['id_crypto', 'date']);
@@ -29,7 +28,7 @@ return new class extends Migration
     /**
      * Reverse the migrations.
      */
-    public function down(Blueprint $table): void
+    public function down(): void
     {
         Schema::table('histories', function (Blueprint $table) {
             // Rimozione della chiave esterna

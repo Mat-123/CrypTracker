@@ -13,7 +13,17 @@ return new class extends Migration
     {
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('id_crypto');
+            $table->bigInteger('quantity')->unsigned();
+            $table->bigInteger('transaction_price')->unsigned();
+            $table->bigInteger('total_spent')->unsigned();
+            $table->dateTime('transaction_date');
+            $table->string('wallet', 200);
+
+            //definizione delle chiavi esterne
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('id_crypto')->references('id_crypto')->on('maps')->onDelete('cascade');
         });
     }
 
@@ -22,6 +32,11 @@ return new class extends Migration
      */
     public function down(): void
     {
+        Schema::table('transcations', function (Blueprint $table) {
+            // Rimozione delle chiavi esterne
+            $table->dropForeign(['user_id']);
+            $table->dropForeign(['id_crypto']);
+        });
         Schema::dropIfExists('transactions');
     }
 };
