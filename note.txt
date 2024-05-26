@@ -1,0 +1,5 @@
+Politiche CORS non serve mettere * ma solo l'indirizzo del sito web, in quanto il FE, se sullo stesso dominio/server si connette da li (non dipende dall'IP dell'utente)
+
+Rispetto al codice di Henry le routs delle api andranno protette con il middleware
+
+Gestire cookie per la sicurezza
