@@ -6,14 +6,13 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
         Schema::create('histories', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('id_crypto');
+            $table->string('name_crypto', 40);
+            $table->string('slug_crypto', 40);
             $table->bigInteger('price')->unsigned()->nullable();
             $table->date('date');
             $table->bigInteger('m_cap')->unsigned()->nullable();
@@ -32,7 +31,13 @@ return new class extends Migration
      */
     public function down(Blueprint $table): void
     {
-        $table->dropForeign(['id_crypto']);
+        Schema::table('histories', function (Blueprint $table) {
+            // Rimozione della chiave esterna
+            $table->dropForeign(['id_crypto']);
+            // Rimozione dell'indice
+            $table->dropIndex(['id_crypto', 'date']);
+        });
+
         Schema::dropIfExists('histories');
     }
 };
