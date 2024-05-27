@@ -17,7 +17,10 @@ class MapFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'id_crypto' =>  fake()->unique()->randomNumber(2, false),
+            'name_crypto' => fake()->word(),
+            'slug_crypto' => fake()->word(),
+            'fetch_price' => fake()->boolean(),
         ];
     }
 }

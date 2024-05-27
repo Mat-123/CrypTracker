@@ -2,8 +2,9 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Map;
 use Illuminate\Database\Seeder;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class MapSeeder extends Seeder
 {
@@ -12,6 +13,6 @@ class MapSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        Map::factory(10)->create();
     }
 }
