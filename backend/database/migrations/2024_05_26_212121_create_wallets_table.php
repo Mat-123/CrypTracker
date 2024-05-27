@@ -11,14 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('maps', function (Blueprint $table) {
+        Schema::create('wallets', function (Blueprint $table) {
+            $table->id();
             $table->unsignedBigInteger('id_crypto');
             $table->string('name_crypto', 40);
-            $table->string('slug_crypto', 40);
-            $table->bigInteger('last_value')->unsigned()->nullable();
-            $table->boolean('fetch_price')->default(false);
+            $table->unsignedBigInteger('user_id');
             // definizione degli index
-            $table->index(['fetch_price', 'id_crypto']);
+            $table->index(['user_id']);
+            //definizione delle chiavi esterne
+            $table->foreign('id_crypto')->references('id_crypto')->on('maps');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
@@ -27,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('maps');
+        Schema::dropIfExists('wallets');
     }
 };
