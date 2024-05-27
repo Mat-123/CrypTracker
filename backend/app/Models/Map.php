@@ -18,11 +18,6 @@ class Map extends Model
         return $this->hasMany(History::class);
     }
 
-    public function transactions(): HasMany
-    {
-        return $this->hasMany(Transaction::class);
-    }
-
     public function wallets(): HasMany
     {
         return $this->hasMany(Wallet::class);

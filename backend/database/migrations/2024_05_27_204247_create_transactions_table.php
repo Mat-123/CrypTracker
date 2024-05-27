@@ -23,7 +23,7 @@ return new class extends Migration
 
             //definizione delle chiavi esterne
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('id_crypto')->references('id_crypto')->on('maps')->onDelete('cascade');
+            $table->foreign('id_crypto')->references('id_crypto')->on('wallets')->onDelete('cascade');
         });
     }
 

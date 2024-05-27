@@ -18,8 +18,8 @@ class Transaction extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function Map(): BelongsTo
+    public function Wallet(): BelongsTo
     {
-        return $this->belongsTo(Map::class);
+        return $this->belongsTo(Wallet::class);
     }
 }

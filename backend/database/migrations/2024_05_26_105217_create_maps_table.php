@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('maps', function (Blueprint $table) {
-            $table->unsignedBigInteger('id_crypto');
+            $table->unsignedBigInteger('id_crypto')->primary();
             $table->string('name_crypto', 40);
             $table->string('slug_crypto', 40);
             $table->bigInteger('last_value')->unsigned()->nullable();

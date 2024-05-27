@@ -18,8 +18,8 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             MapSeeder::class,
             HistorySeeder::class,
-            TransactionSeeder::class,
             WalletSeeder::class,
+            TransactionSeeder::class,
         ]);
     }
 }

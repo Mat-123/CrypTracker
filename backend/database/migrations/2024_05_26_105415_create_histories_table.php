@@ -17,6 +17,7 @@ return new class extends Migration
             $table->dateTime('date');
             $table->bigInteger('m_cap')->unsigned()->nullable();
 
+
             // definizione degli index
             $table->index(['id_crypto', 'date']);
 
