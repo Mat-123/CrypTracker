@@ -1,19 +1,23 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
-use App\Http\Requests\StoreTransactionRequest;
-use App\Http\Requests\UpdateTransactionRequest;
-use App\Models\Transaction;
+use App\Models\Map;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreMapRequest;
+use App\Http\Requests\UpdateMapRequest;
 
-class TransactionController extends Controller
+class MapController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        $maps = Map::all();
+        return [
+            'data' => $maps
+        ];
     }
 
     /**
@@ -27,7 +31,7 @@ class TransactionController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreTransactionRequest $request)
+    public function store(StoreMapRequest $request)
     {
         //
     }
@@ -35,7 +39,7 @@ class TransactionController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Transaction $transaction)
+    public function show(Map $map)
     {
         //
     }
@@ -43,7 +47,7 @@ class TransactionController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Transaction $transaction)
+    public function edit(Map $map)
     {
         //
     }
@@ -51,7 +55,7 @@ class TransactionController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateTransactionRequest $request, Transaction $transaction)
+    public function update(UpdateMapRequest $request, Map $map)
     {
         //
     }
@@ -59,7 +63,7 @@ class TransactionController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Transaction $transaction)
+    public function destroy(Map $map)
     {
         //
     }

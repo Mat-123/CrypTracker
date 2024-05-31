@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
-use App\Http\Requests\StoreHistoryRequest;
-use App\Http\Requests\UpdateHistoryRequest;
-use App\Models\History;
+use App\Models\Wallet;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreWalletRequest;
+use App\Http\Requests\UpdateWalletRequest;
 
-class HistoryController extends Controller
+class WalletController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -27,7 +28,7 @@ class HistoryController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreHistoryRequest $request)
+    public function store(StoreWalletRequest $request)
     {
         //
     }
@@ -35,7 +36,7 @@ class HistoryController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(History $history)
+    public function show(Wallet $wallet)
     {
         //
     }
@@ -43,7 +44,7 @@ class HistoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(History $history)
+    public function edit(Wallet $wallet)
     {
         //
     }
@@ -51,7 +52,7 @@ class HistoryController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateHistoryRequest $request, History $history)
+    public function update(UpdateWalletRequest $request, Wallet $wallet)
     {
         //
     }
@@ -59,7 +60,7 @@ class HistoryController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(History $history)
+    public function destroy(Wallet $wallet)
     {
         //
     }
