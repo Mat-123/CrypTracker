@@ -1,13 +1,22 @@
 <mxfile host="65bd71144e">
     <diagram id="3jpGTzMEVQdeV-G8sYiz" name="Page-1">
-        <mxGraphModel dx="2555" dy="2596" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="1654" math="0" shadow="0">
+        <mxGraphModel dx="2555" dy="2456" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="1654" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
+                <mxCell id="13" style="edgeStyle=orthogonalEdgeStyle;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;endArrow=ERoneToMany;endFill=0;" edge="1" parent="1" source="2" target="7">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="14" style="edgeStyle=orthogonalEdgeStyle;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;endArrow=ERoneToMany;endFill=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="6" target="6">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
                 <mxCell id="2" value="users&lt;br&gt;&lt;br&gt;id&lt;br&gt;nickname/email&lt;br&gt;password" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
                     <mxGeometry x="210" y="400" width="180" height="200" as="geometry"/>
                 </mxCell>
                 <mxCell id="11" style="edgeStyle=orthogonalEdgeStyle;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;endArrow=ERoneToMany;endFill=0;" edge="1" parent="1" source="4" target="5">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="12" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=ERoneToMany;endFill=0;" edge="1" parent="1" source="4" target="7">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
                 <mxCell id="4" value="crypto_map&lt;br&gt;&lt;br&gt;&lt;br&gt;id_crypto (usare quello fornito da server esterno)&lt;br&gt;name&lt;br&gt;slug&lt;br&gt;last_value" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
@@ -15,6 +24,9 @@
                 </mxCell>
                 <mxCell id="5" value="crypto_history_prices&lt;br&gt;&lt;br&gt;id_crypto(preso da crypto_map)&lt;br&gt;name&lt;br&gt;slug&lt;br&gt;price&lt;br&gt;date" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
                     <mxGeometry x="450" y="120" width="180" height="200" as="geometry"/>
+                </mxCell>
+                <mxCell id="15" value="" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=ERoneToMany;endFill=0;" edge="1" parent="1" source="6" target="7">
+                    <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
                 <mxCell id="6" value="users_transactions&lt;br&gt;&lt;br&gt;id(users)&lt;br&gt;id_crypto(crypto_map)&lt;br&gt;quantity&lt;br&gt;transaction_price&lt;br&gt;total_spent&lt;br&gt;transaction_date&lt;br&gt;wallet" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
                     <mxGeometry x="-50" y="120" width="180" height="200" as="geometry"/>

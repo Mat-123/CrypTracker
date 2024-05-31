@@ -18,7 +18,7 @@ return new class extends Migration
             $table->bigInteger('quantity')->unsigned();
             $table->bigInteger('transaction_price')->unsigned();
             $table->bigInteger('total_spent')->unsigned();
-            $table->dateTime('transaction_date');
+            $table->date('transaction_date');
             $table->string('wallet', 200);
 
             //definizione delle chiavi esterne
@@ -32,7 +32,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('transcations', function (Blueprint $table) {
+        Schema::table('transactions', function (Blueprint $table) {
             // Rimozione delle chiavi esterne
             $table->dropForeign(['user_id']);
             $table->dropForeign(['id_crypto']);
