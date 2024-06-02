@@ -2,17 +2,17 @@
 
 namespace Database\Seeders;
 
-use App\Models\Map;
-use Illuminate\Database\Seeder;
+use App\Models\Wallet;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Database\Seeder;
 
-class MapSeeder extends Seeder
+class WalletSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        Map::factory(10)->create();
+        Wallet::factory(10)->create();
     }
 }

@@ -2,17 +2,22 @@
 
 namespace Database\Seeders;
 
-use App\Models\Map;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
-class MapSeeder extends Seeder
+class UserSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        Map::factory(10)->create();
+        User::factory(10)->create();
+
+        User::factory()->create([
+            'name' => 'Prova',
+            'email' => 'test@example.com',
+        ]);
     }
 }

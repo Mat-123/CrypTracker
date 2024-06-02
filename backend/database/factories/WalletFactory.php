@@ -3,12 +3,13 @@
 namespace Database\Factories;
 
 use App\Models\Map;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\History>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Wallet>
  */
-class HistoryFactory extends Factory
+class WalletFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -17,17 +18,13 @@ class HistoryFactory extends Factory
      */
     public function definition(): array
     {
-        $idcrypto = Map::all()->pluck('id_crypto')->all();
+        $iduser = User::all()->pluck('id')->all();
         $namecrypto = Map::all()->pluck('name_crypto')->all();
-        $slugcrypto = Map::all()->pluck('slug_crypto')->all();
+        $idcrypto = Map::all()->pluck('id_crypto')->all();
         return [
+            'user_id' => fake()->randomElement($iduser),
             'id_crypto' => fake()->randomElement($idcrypto),
             'name_crypto' => fake()->randomElement($namecrypto),
-            'slug_crypto' => fake()->randomElement($slugcrypto),
-            'price' => fake()->randomNumber(4, false),
-            'date' => fake()->dateTimeBetween('-1 week', 'now'),
-            'm_cap' => fake()->randomNumber(7, true),
-
         ];
     }
 }

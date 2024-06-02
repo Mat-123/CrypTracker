@@ -17,6 +17,8 @@ return new class extends Migration
             $table->string('slug_crypto', 40);
             $table->bigInteger('last_value')->unsigned()->nullable();
             $table->boolean('fetch_price')->default(false);
+            // definizione degli index
+            $table->index(['id_crypto', 'fetch_price']);
         });
     }
 
