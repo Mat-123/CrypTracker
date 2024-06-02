@@ -9,5 +9,5 @@ Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
 });
 
 Route::name('api.')->prefix('v1')->group(function () {
-    Route::get('/crypto', [MapController::class, 'index'])->name('maps.index');
+    Route::get('/crypto', [MapController::class, 'search'])->name('crypto.search');
 });
