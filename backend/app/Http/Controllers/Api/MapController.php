@@ -1,10 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
+use App\Models\Map;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreMapRequest;
 use App\Http\Requests\UpdateMapRequest;
-use App\Models\Map;
 
 class MapController extends Controller
 {
@@ -62,5 +64,16 @@ class MapController extends Controller
     public function destroy(Map $map)
     {
         //
+    }
+    public function search(Request $request)
+    {
+        // Recupera il termine di ricerca dall'input della richiesta
+        $query = $request->input('query');
+
+        // Esegui la query sulla tabella 'map', cercando nella colonna 'name_crypto'
+        $results = Map::where('name_crypto', 'LIKE', "%{$query}%")->get();
+
+        // Restituisci i risultati in formato JSON
+        return response()->json($results);
     }
 }
