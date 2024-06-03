@@ -45,13 +45,7 @@ const Navbar = () => {
 
                     {user ? (
                         <>
-                            <span className="me-2">{user.name}</span>
-                            <img
-                                className="me-2"
-                                src={user.profile_img}
-                                alt=""
-                                style={{ height: '50px', width: '50px' }}
-                            />
+                            <span className="me-2 text-white">{user.name}</span>
                             <button
                                 className="btn btn-primary"
                                 onClick={logout}
