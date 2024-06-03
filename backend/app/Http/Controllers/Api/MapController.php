@@ -72,8 +72,12 @@ class MapController extends Controller
 
         // Esegui la query sulla tabella 'map', cercando nella colonna 'name_crypto'
         $results = Map::where('name_crypto', 'LIKE', "%{$query}%")->get();
-
+        if ($results->isEmpty()) {
+            return response(['message' => 'Not found'], 404);
+        }
         // Restituisci i risultati in formato JSON
-        return response()->json($results);
+        return [
+            'data' => $results
+        ];
     }
 }
