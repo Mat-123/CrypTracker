@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-function SearchForm({ onResults }) {
+function SearchForm() {
     const [query, setQuery] = useState('');
+    const navigate = useNavigate();
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -9,11 +11,11 @@ function SearchForm({ onResults }) {
         fetch(`http://localhost:8000/api/v1/crypto?query=${query}`)
             .then((response) => response.json())
             .then((data) => {
-                onResults(data.results); // Passa i risultati alla funzione onResults
+                navigate('/results', { state: { results: data.data } }); // Naviga alla pagina dei risultati con i dati della ricerca
             })
             .catch((error) => {
                 console.error('Errore nella ricerca:', error);
-                onResults([]); // Passa un array vuoto in caso di errore
+                navigate('/results', { state: { results: [] } }); // Naviga alla pagina dei risultati con un array vuoto in caso di errore
             });
     };
 
