@@ -21,7 +21,7 @@ function SearchForm() {
 
     return (
         <form onSubmit={handleSubmit} className="mb-4">
-            <div className="form-group">
+            <div className="form-group mt-5">
                 <input
                     type="text"
                     className="form-control"
@@ -30,7 +30,7 @@ function SearchForm() {
                     onChange={(e) => setQuery(e.target.value)}
                 />
             </div>
-            <button type="submit" className="btn btn-primary">Cerca</button>
+            <button type="submit" className="btn btn-primary mt-3">Cerca</button>
         </form>
     );
 }
