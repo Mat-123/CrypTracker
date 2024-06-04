@@ -9,8 +9,10 @@ import GuestRoutes from './Pages/GuestRoutes';
 import Login from './Pages/Login';
 import { LOGIN } from './redux/actions';
 import Register from './Pages/Register';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/js/bootstrap.bundle.min";
 import Navbar from './Components/Navbar';
+import Home from './Pages/Home';
 
 
 function App() {
@@ -41,7 +43,7 @@ function App() {
           <div className="row">
           <div className="col-8 mx-auto">
           <Routes>
-          
+            <Route path="/" element={<Home />} />
                   <Route path="/crypto" element={<SearchForm />} />
                   <Route path="/results" element={<Results />} />
 
