@@ -31,7 +31,20 @@ class TransactionController extends Controller
      */
     public function store(StoreTransactionRequest $request)
     {
-        //
+        $userId = Auth::id();
+        $validatedData = $request->validate([
+            'id_crypto' => 'required|integer',
+            'quantity' => 'required|integer',
+            'transaction_price' => 'required|integer',
+            'total_spent' => 'required|integer',
+            'transaction_date' => 'required|date',
+            'wallet' =>  'nullable|string|max:255',
+        ]);
+        $validatedData['user_id'] = $userId;
+        $transaction = Transaction::create($validatedData);
+
+
+        return response()->json(['message' => 'Transaction added successfully', 'transaction' => $transaction], 201);
     }
 
     /**

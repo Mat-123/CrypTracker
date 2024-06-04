@@ -12,6 +12,8 @@ class Transaction extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['user_id', 'id_crypto', 'quantity', 'transaction_price', 'total_spent', 'transaction_date', 'wallet'];
+
     public $timestamps = false;
 
     public function user(): BelongsTo
