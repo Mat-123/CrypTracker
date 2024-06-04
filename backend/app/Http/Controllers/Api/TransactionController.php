@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Models\Transaction;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StoreTransactionRequest;
 use App\Http\Requests\UpdateTransactionRequest;
 
@@ -63,5 +64,15 @@ class TransactionController extends Controller
     public function destroy(Transaction $transaction)
     {
         //
+    }
+
+    public function getTransactionsByUserAndCryptoId($cryptoId)
+    {
+        $userId = Auth::id();
+        $transactions = Transaction::where('user_id', $userId)
+            ->where('id_crypto', $cryptoId)
+            ->get();
+
+        return $transactions;
     }
 }

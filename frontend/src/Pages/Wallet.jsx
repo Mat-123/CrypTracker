@@ -42,8 +42,12 @@ const Wallet = () => {
       <h1>Crypto Wallet</h1>
       <ul>
       {Object.entries(cryptoQuantities).map(([id_crypto, quantity]) => (
-          <li key={id_crypto}>
+          <li key={id_crypto} className="mb-3">
             {cryptoNames[id_crypto]}: {quantity}
+            <Link to={`/transactions/${id_crypto}`}>
+            <button className="btn btn-primary ms-5">Manage</button>
+          </Link>
+
           </li>
         ))}
       </ul>

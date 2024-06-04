@@ -16,6 +16,7 @@ import Home from './Pages/Home';
 import ProtectedRoutes from './Pages/ProtectedRoutes';
 import Error404 from './Pages/Error404';
 import Wallet from './Pages/Wallet';
+import Transactions from './Pages/Transactions';
 
 
 function App() {
@@ -52,6 +53,7 @@ function App() {
                     <Route path="/crypto" element={<SearchForm />} />
                     <Route path="/results" element={<Results />} />
                     <Route path='/wallet' element={<Wallet />} />
+                    <Route path="/transactions/:id_crypto" element={<Transactions />} />
                   </Route>
 
                   <Route element={<GuestRoutes />}>
