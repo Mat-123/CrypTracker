@@ -49,10 +49,6 @@ const Register = () => {
                     payload: res.data,
                 });
             });
-        // .catch((err) => {
-        //     console.log(err.response.data.errors);
-        //     setErrors(err.response.data.errors);
-        // });
     };
 
     return (

@@ -8,7 +8,7 @@ function SearchForm() {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        fetch(`http://localhost:8000/api/v1/crypto?query=${query}`)
+        fetch(`/api/v1/crypto?query=${query}`)
             .then((response) => response.json())
             .then((data) => {
                 navigate('/results', { state: { results: data.data } }); // Naviga alla pagina dei risultati con i dati della ricerca

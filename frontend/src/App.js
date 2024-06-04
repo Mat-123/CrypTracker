@@ -13,6 +13,9 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min";
 import Navbar from './Components/Navbar';
 import Home from './Pages/Home';
+import ProtectedRoutes from './Pages/ProtectedRoutes';
+import Error404 from './Pages/Error404';
+import Wallet from './Pages/Wallet';
 
 
 function App() {
@@ -40,22 +43,28 @@ function App() {
         <Navbar />
         <div className="App">
           <div className="container">
-          <div className="row">
-          <div className="col-8 mx-auto">
-          <Routes>
-            <Route path="/" element={<Home />} />
-                  <Route path="/crypto" element={<SearchForm />} />
-                  <Route path="/results" element={<Results />} />
+            <div className="row">
+              <div className="col-8 mx-auto">
+                <Routes>
+                  <Route path="/" element={<Home />} />
+
+                  <Route element={<ProtectedRoutes />}>
+                    <Route path="/crypto" element={<SearchForm />} />
+                    <Route path="/results" element={<Results />} />
+                    <Route path='/wallet' element={<Wallet />} />
+                  </Route>
 
                   <Route element={<GuestRoutes />}>
                     <Route path="/login" element={<Login />} />
                     <Route path="/register" element={<Register />} />
                   </Route>
                   
-          </Routes>
-           </div>
-                  </div>
-                  </div>
+                  <Route path="/404" element={<Error404 />} />
+                  <Route path="*" element={<Navigate to="/404" />} />
+                </Routes>
+              </div>
+            </div>
+          </div>
         </div>
         </BrowserRouter>
         )

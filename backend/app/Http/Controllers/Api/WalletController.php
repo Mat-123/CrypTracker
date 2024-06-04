@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Models\Wallet;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StoreWalletRequest;
 use App\Http\Requests\UpdateWalletRequest;
 
@@ -63,5 +64,16 @@ class WalletController extends Controller
     public function destroy(Wallet $wallet)
     {
         //
+    }
+
+    public function fetchwallet()
+    {
+        $userId = Auth::id();
+        $wallets = Wallet::where('user_id', $userId)
+            ->with(['transactions' => function ($query) use ($userId) {
+                $query->where('user_id', $userId);
+            }])->get();
+
+        return response()->json($wallets);
     }
 }
