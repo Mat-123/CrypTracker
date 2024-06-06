@@ -34,7 +34,7 @@ const EditTransaction = ({ isOpen, onClose, transaction }) => {
         try {
             const dataToSend = {
                 ...formData,
-                id_crypto: transaction.id_crypto, // Se necessario
+                id_crypto: transaction.id_crypto,
             id: transaction.id
             };
             const response = await axios.put(`/api/v1/transaction/${transaction.id}`, dataToSend, {
@@ -43,8 +43,8 @@ const EditTransaction = ({ isOpen, onClose, transaction }) => {
                 }
             });
             console.log('Transaction updated successfully:', response.data);
-            onClose(); // Chiudi il modal dopo il salvataggio
-            window.location.reload(); // Ricarica la pagina dopo il salvataggio se necessario
+            onClose();
+            window.location.reload();
         } catch (error) {
             console.error('Errore durante il salvataggio delle modifiche:', error);
         }

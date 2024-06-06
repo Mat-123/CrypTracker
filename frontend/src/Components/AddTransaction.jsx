@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import axios from 'axios';
 
 const AddTransaction = ({ isOpen, onClose, id_crypto }) => {
-    const csrfToken = "{{ csrf_token() }}";
 
     const [formData, setFormData] = useState({
         quantity: '',
@@ -32,7 +31,7 @@ const AddTransaction = ({ isOpen, onClose, id_crypto }) => {
                 }
             });
             console.log('Transaction created successfully:', response.data);
-            onClose(); // Close the modal after successful submission
+            onClose();
         } catch (error) {
             console.error('Error creating transaction:', error);
         }

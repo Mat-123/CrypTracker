@@ -30,6 +30,19 @@ const Transactions = () => {
         setIsEditModalOpen(false);
       };
 
+      const handleDeleteTransaction = async (transactionId) => {
+        const confirmDelete = window.confirm("Are you sure you want to delete this transaction?");
+        if (!confirmDelete) return; // Annulla l'eliminazione se l'utente ha cliccato "Annulla" nel messaggio di conferma
+      
+        try {
+          await axios.delete(`/api/v1/transaction/${transactionId}`);
+          setTransactions(transactions.filter((t) => t.id !== transactionId));
+          console.log("Transaction deleted successfully");
+        } catch (error) {
+          console.error("Error deleting transaction:", error);
+        }
+      };
+
   useEffect(() => {
     axios.get(`/api/v1/transaction/${id_crypto}`).then(res => setTransactions(res.data));
   }, [id_crypto]);
@@ -46,6 +59,7 @@ const Transactions = () => {
           <li key={transaction.id}>
             Quantity: {transaction.quantity}, Transaction Price: {transaction.transaction_price}
             <button onClick={() => openEditModal(transaction)}>Modifica</button>
+            <button onClick={() => handleDeleteTransaction(transaction.id)}>Delete</button>
           </li>
         ))}
       </ul>

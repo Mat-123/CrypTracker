@@ -17,4 +17,5 @@ Route::name('api.')->prefix('v1')->middleware(['auth:sanctum'])->group(function 
     Route::post('/transaction', [TransactionController::class, 'store'])->name('transaction.store');
     Route::get('/transaction/{cryptoId}', [TransactionController::class, 'getTransactionsByUserAndCryptoId'])->name('transaction.getTransactionsByUserAndCryptoId');
     Route::put('/transaction/{transaction}', [TransactionController::class, 'update'])->name('transaction.update');
+    Route::delete('/transaction/{transaction}', [TransactionController::class, 'destroy'])->name('transaction.destroy');
 });

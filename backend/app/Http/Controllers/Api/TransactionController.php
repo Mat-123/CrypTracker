@@ -68,15 +68,15 @@ class TransactionController extends Controller
      */
     public function update(UpdateTransactionRequest $request, Transaction $transaction)
     {
-        // Ottieni l'ID dell'utente autenticato
+
         $userId = Auth::id();
 
-        // Verifica che la transazione appartenga all'utente autenticato
+
         if ($transaction->user_id != $userId) {
             return response()->json(['message' => 'Transaction not found or you do not have permission to update this transaction'], 403);
         }
 
-        // Aggiorna la transazione con i dati validati
+
         $transaction->update($request->validated());
 
         return response()->json(['message' => 'Transaction updated successfully', 'transaction' => $transaction], 200);
@@ -87,7 +87,12 @@ class TransactionController extends Controller
      */
     public function destroy(Transaction $transaction)
     {
-        //
+        $userId = Auth::id();
+        if ($transaction->user_id != $userId) {
+            return response()->json(['message' => 'Transaction not found or you do not have permission to delete this transaction'], 403);
+        }
+        $transaction->delete();
+        return response()->json(['message' => 'Transaction deleted successfully'], 200);
     }
 
     public function getTransactionsByUserAndCryptoId($cryptoId)
