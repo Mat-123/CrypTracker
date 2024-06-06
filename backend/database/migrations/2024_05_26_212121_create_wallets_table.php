@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('wallets', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('id_crypto');
-            $table->string('name_crypto', 40);
             $table->unsignedBigInteger('user_id');
+            $table->string('name_crypto', 40);
             $table->bigInteger('last_value')->unsigned()->nullable();
 
             // definizione degli index
@@ -24,7 +24,6 @@ return new class extends Migration
             //definizione delle chiavi esterne
             $table->foreign('id_crypto')->references('id_crypto')->on('maps');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreing('last_value')->references('last_value')->on('maps')->onUpdate('cascade');
         });
     }
 
