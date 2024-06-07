@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 
 const AddTransaction = ({ isOpen, onClose, id_crypto }) => {
@@ -10,6 +10,25 @@ const AddTransaction = ({ isOpen, onClose, id_crypto }) => {
         transaction_date: '',
         wallet: ''
     });
+
+    useEffect(() => {
+        // Quando il componente viene montato, impostiamo la data odierna come valore predefinito
+        setFormData((prevFormData) => ({
+            ...prevFormData,
+            transaction_date: new Date().toISOString().split('T')[0]
+        }));
+    }, []);
+
+    useEffect(() => {
+        // Calcola automaticamente total_spent ogni volta che quantity o transaction_price cambiano
+        const { quantity, transaction_price } = formData;
+        if (quantity && transaction_price) {
+            setFormData((prevFormData) => ({
+                ...prevFormData,
+                total_spent: quantity * transaction_price
+            }));
+        }
+    }, [formData.quantity, formData.transaction_price]);
 
     const handleChange = (e) => {
         const { name, value } = e.target;

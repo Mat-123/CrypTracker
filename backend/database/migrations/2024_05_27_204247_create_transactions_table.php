@@ -19,7 +19,7 @@ return new class extends Migration
             $table->bigInteger('transaction_price')->unsigned();
             $table->bigInteger('total_spent')->unsigned();
             $table->date('transaction_date');
-            $table->string('wallet', 200);
+            $table->string('wallet', 200)->nullable();
 
             //definizione delle chiavi esterne
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
