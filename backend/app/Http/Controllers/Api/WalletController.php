@@ -31,7 +31,14 @@ class WalletController extends Controller
      */
     public function store(StoreWalletRequest $request)
     {
-        //
+        $userId = Auth::id();
+        $validatedData = $request->validate([
+            'id_crypto' => 'required|integer',
+            'name_crypto' =>  'nullable|string|max:255',
+        ]);
+        $validatedData['user_id'] = $userId;
+        $addWallet = Wallet::create($validatedData);
+        return response()->json(['message' => 'Crypto added to Wallet successfully', 'addwallet' => $addWallet], 201);
     }
 
     /**

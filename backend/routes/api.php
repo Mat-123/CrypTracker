@@ -14,6 +14,7 @@ Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
 Route::name('api.')->prefix('v1')->middleware(['auth:sanctum'])->group(function () {
     Route::get('/crypto', [MapController::class, 'search'])->name('crypto.search');
     Route::get('/wallet', [WalletController::class, 'fetchwallet'])->name('wallet.fetchwallet');
+    Route::post('/wallet', [WalletController::class, 'store'])->name('wallet.store');
     Route::post('/transaction', [TransactionController::class, 'store'])->name('transaction.store');
     Route::get('/transaction/{cryptoId}', [TransactionController::class, 'getTransactionsByUserAndCryptoId'])->name('transaction.getTransactionsByUserAndCryptoId');
     Route::put('/transaction/{transaction}', [TransactionController::class, 'update'])->name('transaction.update');

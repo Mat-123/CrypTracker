@@ -13,6 +13,13 @@ class Wallet extends Model
 
     public $timestamps = false;
 
+    protected $fillable = [
+        'id_crypto',
+        'user_id',
+        'name_crypto',
+        'last_value',
+    ];
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
