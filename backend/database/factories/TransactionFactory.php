@@ -26,6 +26,7 @@ class TransactionFactory extends Factory
             'transaction_price' => fake()->randomNumber(5, false),
             'total_spent' => fake()->randomNumber(5, false),
             'transaction_date' => fake()->date('Y/m/d'),
+            'transaction_type' => fake()->boolean(),
             'wallet' => fake()->word(),
         ];
     }

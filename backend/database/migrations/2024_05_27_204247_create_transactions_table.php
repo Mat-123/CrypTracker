@@ -15,10 +15,11 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('id_crypto');
-            $table->bigInteger('quantity')->unsigned();
-            $table->bigInteger('transaction_price')->unsigned();
-            $table->bigInteger('total_spent')->unsigned();
+            $table->decimal('quantity', total: 20, places: 9)->unsigned();
+            $table->decimal('transaction_price', total: 18, places: 8)->unsigned();
+            $table->decimal('total_spent', total: 12, places: 3)->unsigned();
             $table->date('transaction_date');
+            $table->boolean('transaction_type');
             $table->string('wallet', 200)->nullable();
 
             //definizione delle chiavi esterne

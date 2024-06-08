@@ -11,8 +11,6 @@ class Map extends Model
 {
     use HasFactory;
 
-    public $timestamps = false;
-
     protected $primaryKey = 'id_crypto';
     public $incrementing = false;
     protected $keyType = 'integer';

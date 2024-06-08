@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { LOGOUT } from '../redux/actions';
@@ -15,6 +16,24 @@ const Navbar = () => {
             .then(() => dispatch({ type: LOGOUT }))
             .then(() => navigate('/login'));
     };
+
+    useEffect(() => {
+        const responseInterceptor = axios.interceptors.response.use(
+          response => response,
+          error => {
+            if (error.response && error.response.status === 401) {
+              // Token scaduto o errore di autenticazione, redirigi alla pagina di login
+              navigate("/login");
+            }
+            return Promise.reject(error);
+          }
+        );
+    
+        // Pulizia dell'interceptor quando il componente viene smontato
+        return () => {
+          axios.interceptors.response.eject(responseInterceptor);
+        };
+      }, [navigate]);
 
     return (
         <nav className="navbar navbar-expand-lg bg-dark" data-bs-theme="dark">
