@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Models\Map;
 use App\Models\Wallet;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -38,6 +39,14 @@ class WalletController extends Controller
         ]);
         $validatedData['user_id'] = $userId;
         $addWallet = Wallet::create($validatedData);
+
+        //verify that the id_crypto is marked to store historical data
+        $idCrypto = $validatedData['id_crypto'];
+        $mapEntry = Map::find($idCrypto);
+        if ($mapEntry && $mapEntry->fetch_price == 0) {
+            $mapEntry->fetch_price = 1;
+            $mapEntry->save();
+        }
         return response()->json(['message' => 'Crypto added to Wallet successfully', 'addwallet' => $addWallet], 201);
     }
 

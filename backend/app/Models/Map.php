@@ -13,6 +13,10 @@ class Map extends Model
 
     public $timestamps = false;
 
+    protected $primaryKey = 'id_crypto';
+    public $incrementing = false;
+    protected $keyType = 'integer';
+
     public function histories(): HasMany
     {
         return $this->hasMany(History::class);
