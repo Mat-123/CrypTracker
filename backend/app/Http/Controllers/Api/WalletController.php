@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Models\Map;
 use App\Models\Wallet;
+use App\Models\Transaction;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StoreWalletRequest;
@@ -77,9 +78,24 @@ class WalletController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Wallet $wallet)
+    public function destroy($idCrypto)
     {
-        //
+        $userId = Auth::id();
+
+        $wallet = Wallet::where('user_id', $userId)->where('id_crypto', $idCrypto)->first();
+
+
+        if ($wallet) {
+            Transaction::where('user_id', $userId)
+                ->where('id_crypto', $idCrypto)
+                ->delete();
+
+            $wallet->delete();
+
+            return response()->json(['message' => 'Portafoglio e transazioni cancellati con successo'], 200);
+        } else {
+            return response()->json(['message' => 'Portafoglio non trovato'], 404);
+        }
     }
 
     public function fetchwallet()

@@ -1,12 +1,13 @@
 
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import AddTransaction from "../Components/AddTransaction";
 import EditTransaction from "../Components/EditTransaction";
 
 const Transactions = () => {
   const { id_crypto } = useParams();
+  const navigate = useNavigate();
   const [transactions, setTransactions] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
@@ -31,7 +32,7 @@ const Transactions = () => {
       };
 
       const handleDeleteTransaction = async (transactionId) => {
-        const confirmDelete = window.confirm("Are you sure you want to delete this transaction?");
+        const confirmDelete = window.confirm("Are you sure you want to delete this transaction? This action cannot be undone.");
         if (!confirmDelete) return; // Annulla l'eliminazione se l'utente ha cliccato "Annulla" nel messaggio di conferma
       
         try {
@@ -43,6 +44,23 @@ const Transactions = () => {
         }
       };
 
+      const handleDeleteCrypto = async () => {
+        const confirmDelete = window.confirm("Are you sure you want to remove this crypto? This action will remove also all the related transactions and cannot be undone.");
+        if (!confirmDelete) return;
+    
+        try {
+            // Ora elimina la crittovaluta stessa
+            await axios.delete(`/api/v1/wallet/${id_crypto}`);
+    
+            console.log("Crypto and related transactions deleted successfully");
+    
+            navigate("/wallet");
+            // Se necessario, aggiorna lo stato o esegui altre azioni necessarie dopo l'eliminazione
+        } catch (error) {
+            console.error("Error deleting crypto and related transactions:", error);
+        }
+    }
+
   useEffect(() => {
     axios.get(`/api/v1/transaction/${id_crypto}`).then(res => setTransactions(res.data));
   }, [id_crypto]);
@@ -53,6 +71,7 @@ const Transactions = () => {
       <button onClick={openModal}>Create Transaction</button>
             <AddTransaction isOpen={isModalOpen} onClose={closeModal} id_crypto={id_crypto}/>
             <EditTransaction isOpen={isEditModalOpen} onClose={closeEditModal} transaction={selectedTransaction} />
+            <button onClick={handleDeleteCrypto}>Remove Crypto</button>
 
       <ul>
         {transactions.map(transaction => (
