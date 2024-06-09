@@ -1,5 +1,15 @@
 Politiche CORS non serve mettere * ma solo l'indirizzo del sito web, in quanto il FE, se sullo stesso dominio/server si connette da li (non dipende dall'IP dell'utente)
 
-Rispetto al codice di Henry le routes delle api andranno protette con il middleware
+Lavori da eseguire sul progetto:
+ 
+Modificare e verificare gli invii dei dati per essere coerenti con le tabelle
+
+Modificare il form di invio transazioni (aggiungere i bottoni buy e sell)
+
+Inserire le Chart
+
+Integrare tutta la parte degli NFT
+
+
 
 Gestire cookie per la sicurezza
