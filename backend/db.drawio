@@ -1,6 +1,6 @@
 <mxfile host="65bd71144e">
     <diagram id="3jpGTzMEVQdeV-G8sYiz" name="Page-1">
-        <mxGraphModel dx="2264" dy="2319" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="1654" math="0" shadow="0">
+        <mxGraphModel dx="2105" dy="2184" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="1654" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -22,16 +22,16 @@
                 <mxCell id="4" value="crypto_map&lt;br&gt;&lt;br&gt;&lt;br&gt;id_crypto (usare quello fornito da server esterno)&lt;br&gt;name&lt;br&gt;slug&lt;br&gt;last_value" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
                     <mxGeometry x="210" y="-170" width="180" height="200" as="geometry"/>
                 </mxCell>
-                <mxCell id="5" value="crypto_history_prices&lt;br&gt;&lt;br&gt;id_crypto(preso da crypto_map)&lt;br&gt;name&lt;br&gt;slug&lt;br&gt;price&lt;br&gt;date" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                <mxCell id="5" value="crypto_histories&lt;br&gt;&lt;br&gt;id_crypto(preso da crypto_map)&lt;br&gt;name&lt;br&gt;slug&lt;br&gt;price&lt;br&gt;date" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
                     <mxGeometry x="450" y="120" width="180" height="200" as="geometry"/>
                 </mxCell>
                 <mxCell id="15" value="" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=ERone;endFill=0;startArrow=ERoneToMany;startFill=0;" parent="1" source="6" target="7" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="6" value="users_transactions&lt;br&gt;&lt;br&gt;id(users)&lt;br&gt;id_crypto(crypto_map)&lt;br&gt;quantity&lt;br&gt;transaction_price&lt;br&gt;total_spent&lt;br&gt;transaction_date&lt;br&gt;wallet" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                <mxCell id="6" value="transactions&lt;br&gt;&lt;br&gt;id(users)&lt;br&gt;id_crypto(crypto_map)&lt;br&gt;quantity&lt;br&gt;transaction_price&lt;br&gt;total_spent&lt;br&gt;transaction_date&lt;br&gt;wallet" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
                     <mxGeometry x="-50" y="120" width="180" height="200" as="geometry"/>
                 </mxCell>
-                <mxCell id="7" value="users_wallets&lt;br&gt;&lt;br&gt;id(users)&lt;br&gt;id_crypto(crypto_map)&lt;br&gt;total_quantity(somma di tutte le quantity della coin per ogni transazione)" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                <mxCell id="7" value="wallets&lt;br&gt;&lt;br&gt;id(users)&lt;br&gt;id_crypto(crypto_map)&lt;br&gt;total_quantity(somma di tutte le quantity della coin per ogni transazione)" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
                     <mxGeometry x="210" y="120" width="180" height="200" as="geometry"/>
                 </mxCell>
                 <mxCell id="8" value="Processo di raccolta dati:&lt;br&gt;Users: tabella dati di tutti gli utenti registrati&lt;br&gt;&lt;br&gt;crypto_map: tabella dati che funziona da indice per tutte le crypto supportate(ovvero quelle disponibili dal server esterno da cui recupero i dati con le fetch giornaliere), questa tabella verra' aggiornata quotidianamente tramite fetch a server esterno&lt;br&gt;&lt;br&gt;Crypto_hystory_price e' la tabella che raccoglie i dati storici del valore di ogni criptovaluta presente su crypto_map, in automatico il server ogni giorno ad un orario specifico esegue la fetch del valore al momento di ogni cripto presente in crypto_map e lo salva (con la data del giorno)&lt;br&gt;&lt;br&gt;Users_wallets e' la tabella dove vengono salvate tutte le crypto preferite da ogni singolo utente&lt;br&gt;&lt;br&gt;User_transactions dove vengono salvate tutte le transazioni eseguite da ogni singolo utente per ogni singola coin" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
