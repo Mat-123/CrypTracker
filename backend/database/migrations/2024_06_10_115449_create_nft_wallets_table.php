@@ -13,7 +13,16 @@ return new class extends Migration
     {
         Schema::create('nft_wallets', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('user_id');
+            $table->string('nft_name', 100);
+            $table->string('slug_nft', 100);
             $table->timestamps();
+
+            // definizione degli index
+            $table->index(['user_id']);
+
+            //definizione delle chiavi esterne
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

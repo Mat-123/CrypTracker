@@ -1,0 +1,136 @@
+Ricerca NFT su mainnet ETH
+
+request con slug: (puo' essere effettuata anche usando il contratto o il name)
+curl --request GET \
+     --url 'https://api-mainnet.magiceden.dev/v3/rtp/ethereum/collections/v7?slug=cryptopunks&includeMintStages=false&includeSecurityConfigs=false&normalizeRoyalties=false&useNonFlaggedFloorAsk=false&sortBy=allTimeVolume&limit=20' \
+     --header 'Authorization: Bearer YOUR_API_KEY' \
+     --header 'accept: */*'
+
+request con il name:
+curl --request GET \
+     --url 'https://api-mainnet.magiceden.dev/v3/rtp/ethereum/collections/v7?name=punks&includeMintStages=false&includeSecurityConfigs=false&normalizeRoyalties=false&useNonFlaggedFloorAsk=false&sortBy=allTimeVolume&limit=20' \
+     --header 'Authorization: Bearer YOUR_API_KEY' \
+     --header 'accept: */*'
+
+Response:
+{
+  "collections": [
+    {
+      "chainId": 1,
+      "id": "0xb47e3cd837ddf8e4c57f05d70ab865de6e193bbb",
+      "slug": "cryptopunks",
+      "createdAt": "2022-09-13T15:07:21.425Z",
+      "updatedAt": "2024-06-10T11:19:44.473Z",
+      "name": "CryptoPunks",
+      "symbol": "Ͼ",
+      "contractDeployedAt": "2017-06-23T15:59:32.000Z",
+      "image": "https://img.reservoir.tools/images/v2/mainnet/z9JRSpLYGu7%2BCZoKWtAuABZyrcC5KO5c%2Fpl9qoTyb1GXYbn1ksY1D9Vxjv7nkqqX5v3Kxd1M%2FV%2BIriyWSPgAmIlbJ5Zn3oFYI87ssNtSpi3kbyV5bfxjgqq45I7OyWHm1BmVO6ZZ9ARDi3eP%2F7bs%2BG%2By5msQ4%2FpiwMMsk4M9yWpe7GUMs0Td8rs%2BQKil68ircmkhAiuwjcfvZwQ4Wlx%2FEMpLsIgA5jsFzC82AgVosLWfGKXP1HGsrlivU%2FcpOpOkbRnLysNnZKcSy4fxbMMbIA2Qv0PoK31NskB5vQSkdkQ%3D?width=250",
+      "banner": "https://img.reservoir.tools/images/v2/mainnet/z9JRSpLYGu7%2BCZoKWtAuAO71o9HLhCPCc0hiC%2Bx02qd1t%2F7U%2F%2BxWMhL7ySf%2F8CzC4Xm9LLJQinE3jhczaq1zWpa8ELZ8MkEglhFekzNCdskvV3PhP5LepzZ%2BsEZdFnxKWLAlAL5mnokw92J0b%2BUzDMKD6jwCPoAH1cCBdSe1qFgnaj0CITEXhU66e07b%2FNrr2E1QYpusfGwTAEXkYJb58w%3D%3D",
+      "twitterUrl": null,
+      "discordUrl": "https://discord.gg/tQp4pSE",
+      "externalUrl": "https://cryptopunks.app/",
+      "twitterUsername": "cryptopunksnfts",
+      "openseaVerificationStatus": "verified",
+      "magicedenVerificationStatus": null,
+      "description": "CryptoPunks launched as a fixed set of 10,000 items in mid-2017 and became one of the inspirations for the ERC-721 standard. They have been featured in places like The New York Times, Christie’s of London, Art|Basel Miami, and The PBS NewsHour.",
+      "metadataDisabled": false,
+      "isSpam": false,
+      "isNsfw": false,
+      "isMinting": false,
+      "sampleImages": [
+        "https://img.reservoir.tools/images/v2/mainnet/7%2FrdF%2Fe%2F0iXY8HduhRCoIehkmFeXPeOQQFbbmIPfjCZP7nsOEg4DJ1sRvvAZOBOPIJV6%2BgSavSFRzf2uRqDu0DvilRPrhUd7CbEuPOTDKe0dMIymLFb2gm8CXZaqllUay4w07LEuH6Aes1UTigOVGA%3D%3D",
+        "https://img.reservoir.tools/images/v2/mainnet/7%2FrdF%2Fe%2F0iXY8HduhRCoIehkmFeXPeOQQFbbmIPfjCYbxSjd5%2B2YQ07fFkOWIQu364uAdoF0oBPnR%2F1k40GcprxoLt2dagM4hVnIhGMcP3gaucvR1HOTLs1xoovPMZC6u%2BceWusiUUwnTjaujwAOBw%3D%3D",
+        "https://img.reservoir.tools/images/v2/mainnet/7%2FrdF%2Fe%2F0iXY8HduhRCoIehkmFeXPeOQQFbbmIPfjCbqb2c6PBN5vokCtgjSuED6mRE2aiyenF7Ju79irtBVcmZoxk7c1GHC3yW%2BQ%2Fqw1DK9zeM1M2MuWMcICr35DwUdTMuKSLD8hyseTwMsKuEVFg%3D%3D",
+        "https://img.reservoir.tools/images/v2/mainnet/7%2FrdF%2Fe%2F0iXY8HduhRCoIehkmFeXPeOQQFbbmIPfjCZQj4wjf13A71EkSSqSCm7nAtHt4nFziCeDGSoKRQf5hD%2B%2FX16Sy4GAHNhGB9EgCGMXzyUhBfkMBucp%2Fttl07ekuYW2zHbUw8OE%2BL823xZhSQ%3D%3D"
+      ],
+      "tokenCount": "9996",
+      "onSaleCount": "1201",
+      "primaryContract": "0xb47e3cd837ddf8e4c57f05d70ab865de6e193bbb",
+      "tokenSetId": "contract:0xb47e3cd837ddf8e4c57f05d70ab865de6e193bbb",
+      "creator": "0xc352b534e8b987e036a93539fd6897f53488e56a",
+      "isSharedContract": false,
+      "royalties": {
+        "recipient": null,
+        "breakdown": [],
+        "bps": 0
+      },
+      "allRoyalties": {
+        "opensea": []
+      },
+      "floorAsk": {
+        "id": "0x5754cf746577299203ab956a629d117921bc8f029b94423e37d4076e4e1e8642",
+        "sourceDomain": "cryptopunks.app",
+        "price": {
+          "currency": {
+            "contract": "0x0000000000000000000000000000000000000000",
+            "name": "Ether",
+            "symbol": "ETH",
+            "decimals": 18
+          },
+          "amount": {
+            "raw": "29500000000000000000",
+            "decimal": 29.5,
+            "usd": 109324.04658,
+            "native": 29.5
+          }
+        },
+        "maker": "0x1919db36ca2fa2e15f9000fd9cdc2edcf863e685",
+        "validFrom": 1717948871,
+        "validUntil": 0,
+        "token": {
+          "contract": "0xb47e3cd837ddf8e4c57f05d70ab865de6e193bbb",
+          "tokenId": "3286",
+          "name": "CryptoPunk #3286",
+          "image": "https://img.reservoir.tools/images/v2/mainnet/7%2FrdF%2Fe%2F0iXY8HduhRCoIehkmFeXPeOQQFbbmIPfjCa91QsOqrY%2BwiR%2BspjvYdZwm4nR2YkFfDeVaNno1S9Rgui%2FvzuidkViHl%2Fbp086qsTkjU3eHfK7EJUfgUOo8HviB61GHlEY3ZNRZgAj2T60aFw3ouP1eY%2FYMh4s2sHTeiA%3D?width=512"
+        }
+      },
+      "topBid": {
+        "id": null,
+        "sourceDomain": null,
+        "price": null,
+        "maker": null,
+        "validFrom": null,
+        "validUntil": null
+      },
+      "rank": {
+        "1day": null,
+        "7day": 5,
+        "30day": 5,
+        "allTime": 4
+      },
+      "volume": {
+        "1day": 0,
+        "7day": 461.084,
+        "30day": 2999.42826,
+        "allTime": 1205197.71622
+      },
+      "volumeChange": {
+        "1day": 0,
+        "7day": 0.7386680764486311,
+        "30day": 1.0736315042265103
+      },
+      "floorSale": {
+        "1day": 33.5,
+        "7day": 32,
+        "30day": 38.81
+      },
+      "floorSaleChange": {
+        "1day": 0.8805970149253731,
+        "7day": 0.921875,
+        "30day": 0.760113372842051
+      },
+      "collectionBidSupported": true,
+      "ownerCount": 3762,
+      "contractKind": "cryptopunks",
+      "mintedTimestamp": 1498225851,
+      "mintStages": []
+    }
+  ]
+}
+
+
+Ricerca NFT su rete SOLANA
+
+request:
+
+response

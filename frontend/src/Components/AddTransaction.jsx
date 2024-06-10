@@ -11,6 +11,8 @@ const AddTransaction = ({ isOpen, onClose, id_crypto }) => {
         wallet: ''
     });
 
+    const [transactionType, setTransactionType] = useState(null);
+
     useEffect(() => {
         // Quando il componente viene montato, impostiamo la data odierna come valore predefinito
         setFormData((prevFormData) => ({
@@ -39,10 +41,15 @@ const AddTransaction = ({ isOpen, onClose, id_crypto }) => {
     };
 
     const handleCreateTransaction = async () => {
+        if (transactionType === null) {
+            alert('Please select a transaction type.');
+            return;
+        }
         try {
             const dataToSend = {
                 ...formData,
-                id_crypto: id_crypto
+                id_crypto: id_crypto,
+                transaction_type: transactionType
             };
             const response = await axios.post('/api/v1/transaction', dataToSend, {
                 headers: {
@@ -66,6 +73,12 @@ const AddTransaction = ({ isOpen, onClose, id_crypto }) => {
                     </div>
                     <div className="modal-body">
                         <form>
+                        <p>Select transaction type:</p>
+                                <div className="d-flex justify-content-between">
+                                    <button type="button" className="btn btn-success" onClick={() => setTransactionType(0)}>Buy</button>
+                                    <button type="button" className="btn btn-danger" onClick={() => setTransactionType(1)}>Sell</button>
+                                </div>
+
                             <div className="mb-3">
                                 <label className="form-label">Quantity</label>
                                 <input type="number" name="quantity" className="form-control" value={formData.quantity} onChange={handleChange} required />

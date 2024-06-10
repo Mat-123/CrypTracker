@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
-use App\Http\Requests\StoreNftMapRequest;
-use App\Http\Requests\UpdateNftMapRequest;
-use App\Models\NftMap;
+use App\Models\NftTransaction;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreNftTransactionRequest;
+use App\Http\Requests\UpdateNftTransactionRequest;
 
-class NftMapController extends Controller
+class NftTransactionController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -27,7 +28,7 @@ class NftMapController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreNftMapRequest $request)
+    public function store(StoreNftTransactionRequest $request)
     {
         //
     }
@@ -35,7 +36,7 @@ class NftMapController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(NftMap $nftMap)
+    public function show(NftTransaction $nftTransaction)
     {
         //
     }
@@ -43,7 +44,7 @@ class NftMapController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(NftMap $nftMap)
+    public function edit(NftTransaction $nftTransaction)
     {
         //
     }
@@ -51,7 +52,7 @@ class NftMapController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateNftMapRequest $request, NftMap $nftMap)
+    public function update(UpdateNftTransactionRequest $request, NftTransaction $nftTransaction)
     {
         //
     }
@@ -59,7 +60,7 @@ class NftMapController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(NftMap $nftMap)
+    public function destroy(NftTransaction $nftTransaction)
     {
         //
     }

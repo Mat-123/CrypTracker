@@ -19,8 +19,8 @@ return new class extends Migration
             $table->string('password');
             $table->rememberToken();
             $table->string('cmc_api_key', 50);
-            $table->string('gecko_api_key', 50);
             $table->string('role', 30)->default('basic');
+            $table->date('premium_expiry')->nullable();
             $table->timestamps();
         });
 

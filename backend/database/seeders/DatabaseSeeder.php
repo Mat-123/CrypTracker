@@ -21,6 +21,9 @@ class DatabaseSeeder extends Seeder
             HistorySeeder::class,
             WalletSeeder::class,
             TransactionSeeder::class,
+            NftMapSeeder::class,
+            NftWalletSeeder::class,
+            NftTransactionSeeder::class,
         ]);
     }
 }

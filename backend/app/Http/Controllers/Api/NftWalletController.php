@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
+use App\Models\NftWallet;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreNftWalletRequest;
 use App\Http\Requests\UpdateNftWalletRequest;
-use App\Models\NftWallet;
 
 class NftWalletController extends Controller
 {

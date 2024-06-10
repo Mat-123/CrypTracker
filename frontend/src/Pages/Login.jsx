@@ -11,6 +11,8 @@ const Login = () => {
         password: '',
     });
 
+    const [error, setError] = useState('');
+
     const updateInputValue = (ev) => {
         setFormData((oldFormData) => ({
             ...oldFormData,
@@ -29,7 +31,14 @@ const Login = () => {
                     type: LOGIN,
                     payload: res.data,
                 });
+            }).catch((error) => {
+                if (error.response && error.response.status === 422) {
+                    setError('Incorrect email or password');
+                } else {
+                    console.error('An error occurred:', error);
+                }
             });
+
     };
 
     return (
@@ -59,6 +68,7 @@ const Login = () => {
                     onChange={(ev) => updateInputValue(ev)}
                     value={formData.password}
                 />
+                {error && <div className="text-danger mt-2">{error}</div>}
             </div>
             <button type="submit" className="btn btn-primary">
                 Login
