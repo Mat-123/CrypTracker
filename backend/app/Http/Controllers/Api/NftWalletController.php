@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Models\NftWallet;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StoreNftWalletRequest;
 use App\Http\Requests\UpdateNftWalletRequest;
 
@@ -14,7 +15,13 @@ class NftWalletController extends Controller
      */
     public function index()
     {
-        //
+        $userId = Auth::id();
+        $wallets = NftWallet::where('user_id', $userId)
+            ->with(['nft_transactions' => function ($query) use ($userId) {
+                $query->where('user_id', $userId);
+            }])->get();
+
+        return response()->json($wallets);
     }
 
     /**
@@ -30,7 +37,16 @@ class NftWalletController extends Controller
      */
     public function store(StoreNftWalletRequest $request)
     {
-        //
+        $userId = Auth::id();
+        $validatedData = $request->validate([
+            'id_crypto' => 'required|integer',
+            'nft_name' =>  'nullable|string|max:255',
+            'slug_nft' =>  'nullable|string|max:255',
+            'chain' =>  'nullable|string|max:255',
+
+        ]);
+        $validatedData['user_id'] = $userId;
+        $addWallet = NftWallet::create($validatedData);
     }
 
     /**

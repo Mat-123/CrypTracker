@@ -1,14 +1,27 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 
 
 const Wallet = () => {
     const [cryptos, setCryptos] = useState([]);
+    const navigate = useNavigate();
+
     useEffect(() => {
-    axios.get('/api/v1/wallet').then(res => setCryptos(res.data))
-    }, []);
+      axios.get('/api/v1/wallet')
+      .then(res => setCryptos(res.data))
+      .catch(error => {
+          if (error.response && error.response.status === 401) {
+              navigate('/login');
+          } else if (error.response && error.response.status === 405) {
+            navigate('/login');
+          }
+           else {
+              console.error('An error occurred:', error);
+          }
+      });
+}, [navigate]);
 
     const calculateCryptoQuantities = (cryptos) => {
         const cryptoQuantities = {};

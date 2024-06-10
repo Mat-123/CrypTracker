@@ -30,7 +30,7 @@ class UserFactory extends Factory
             'password' => static::$password ??= Hash::make('password'),
             'remember_token' => Str::random(10),
             'cmc_api_key' => fake()->randomNumber(8, true),
-            'gecko_api_key' => fake()->randomNumber(8, true),
+            'premium_expiry' => fake()->date(),
         ];
     }
 

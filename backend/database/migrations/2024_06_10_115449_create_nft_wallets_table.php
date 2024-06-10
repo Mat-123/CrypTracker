@@ -16,6 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->string('nft_name', 100);
             $table->string('slug_nft', 100);
+            $table->string('chain', 100);
             $table->timestamps();
 
             // definizione degli index

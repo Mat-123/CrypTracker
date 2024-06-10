@@ -8,13 +8,14 @@ const AddTransaction = ({ isOpen, onClose, id_crypto }) => {
         transaction_price: '',
         total_spent: '',
         transaction_date: '',
-        wallet: ''
+        transaction_type: null,
+        wallet: '',
     });
 
-    const [transactionType, setTransactionType] = useState(null);
+    const [activeButton, setActiveButton] = useState(null);
 
     useEffect(() => {
-        // Quando il componente viene montato, impostiamo la data odierna come valore predefinito
+        // Set the current date as the default value when the component mounts
         setFormData((prevFormData) => ({
             ...prevFormData,
             transaction_date: new Date().toISOString().split('T')[0]
@@ -22,7 +23,7 @@ const AddTransaction = ({ isOpen, onClose, id_crypto }) => {
     }, []);
 
     useEffect(() => {
-        // Calcola automaticamente total_spent ogni volta che quantity o transaction_price cambiano
+        // Automatically calculate total_spent whenever quantity or transaction_price change
         const { quantity, transaction_price } = formData;
         if (quantity && transaction_price) {
             setFormData((prevFormData) => ({
@@ -41,16 +42,17 @@ const AddTransaction = ({ isOpen, onClose, id_crypto }) => {
     };
 
     const handleCreateTransaction = async () => {
-        if (transactionType === null) {
+        if (formData.transaction_type === null) {
             alert('Please select a transaction type.');
             return;
         }
+
         try {
             const dataToSend = {
                 ...formData,
                 id_crypto: id_crypto,
-                transaction_type: transactionType
             };
+            console.log('Sending data:', dataToSend); // Log data being sent
             const response = await axios.post('/api/v1/transaction', dataToSend, {
                 headers: {
                     'X-CSRF-TOKEN': window.csrfToken 
@@ -63,6 +65,14 @@ const AddTransaction = ({ isOpen, onClose, id_crypto }) => {
         }
     };
 
+    const handleTransactionTypeClick = (type) => {
+        setFormData((prevFormData) => ({
+            ...prevFormData,
+            transaction_type: type
+        }));
+        setActiveButton(type);
+    };
+
     return (
         <div className={`modal fade ${isOpen ? 'show d-block' : ''}`} tabIndex="-1" role="dialog">
             <div className="modal-dialog" role="document">
@@ -73,12 +83,23 @@ const AddTransaction = ({ isOpen, onClose, id_crypto }) => {
                     </div>
                     <div className="modal-body">
                         <form>
-                        <p>Select transaction type:</p>
-                                <div className="d-flex justify-content-between">
-                                    <button type="button" className="btn btn-success" onClick={() => setTransactionType(0)}>Buy</button>
-                                    <button type="button" className="btn btn-danger" onClick={() => setTransactionType(1)}>Sell</button>
-                                </div>
-
+                            <p>Select transaction type:</p>
+                            <div className="d-flex justify-content-between">
+                                <button
+                                    type="button"
+                                    className={`btn ${activeButton === 0 ? 'btn-dark' : 'btn-success'}`}
+                                    onClick={() => handleTransactionTypeClick(0)}
+                                >
+                                    Buy
+                                </button>
+                                <button
+                                    type="button"
+                                    className={`btn ${activeButton === 1 ? 'btn-dark' : 'btn-danger'}`}
+                                    onClick={() => handleTransactionTypeClick(1)}
+                                >
+                                    Sell
+                                </button>
+                            </div>
                             <div className="mb-3">
                                 <label className="form-label">Quantity</label>
                                 <input type="number" name="quantity" className="form-control" value={formData.quantity} onChange={handleChange} required />

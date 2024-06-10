@@ -38,6 +38,7 @@ class TransactionController extends Controller
             'transaction_price' => 'required|integer',
             'total_spent' => 'required|integer',
             'transaction_date' => 'required|date',
+            'transaction_type' => 'required|integer',
             'wallet' =>  'nullable|string|max:255',
         ]);
         $validatedData['user_id'] = $userId;
