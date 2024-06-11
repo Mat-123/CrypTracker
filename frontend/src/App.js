@@ -20,6 +20,8 @@ import Transactions from './Pages/Transactions';
 import NftSearchForm from './Components/NftSearchForm';
 import UserSettings from './Pages/UserSettings';
 import Faq from './Pages/Faq';
+import SolSearchResults from './Components/SolSearchResults';
+import EthSearchResults from './Components/EthSearchResults';
 
 
 function App() {
@@ -56,6 +58,8 @@ function App() {
                     <Route path="/crypto" element={<SearchForm />} />
                     <Route path='/nft' element={<NftSearchForm />} />
                     <Route path="/results" element={<Results />} />
+                    <Route path='/ethsearchresults' element={<EthSearchResults />} />
+                    <Route path='/solsearchresults' element={<SolSearchResults />} />
                     <Route path='/wallet' element={<Wallet />} />
                     <Route path="/transactions/:id_crypto" element={<Transactions />} />
                     <Route path='/profile' element={<UserSettings />} />

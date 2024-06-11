@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 function NftSearchForm() {
     const [query, setQuery] = useState('');
@@ -11,9 +12,8 @@ function NftSearchForm() {
 useEffect(() => {
     const SearchNft = async () => {
         try {
-            const response = await fetch('/api/v1/nftwallet');
-            const data = await response.json();
-            setUserWallet(data);
+            const response = await axios.get('/api/v1/nftwallet');
+            setUserWallet(response.data);
         } catch (error) {
             setError('Error, please try again later');
         }
@@ -22,7 +22,7 @@ useEffect(() => {
     SearchNft();
 }, []);
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
         if (!query) {
@@ -38,20 +38,21 @@ useEffect(() => {
         setError('');
 
 
-        const endpoint = chain === '1' 
+        const endpoint = chain === '1'
             ? `https://api-mainnet.magiceden.dev/v3/rtp/ethereum/collections/v7?name=${query}`
             : `https://api-mainnet.magiceden.dev/v2/collections/${query}/stats`;
 
-        fetch(endpoint)
-            .then((response) => response.json())
-            .then((data) => {
-                navigate('/nftresults', { state: { results: data.data, userWallet } });
-            })
-            .catch((error) => {
-                console.error('Errore nella ricerca:', error);
-                navigate('/nftresults', { state: { results: [] } });
-            });
+        try {
+            const response = await axios.get(endpoint);
+            const data = response.data;
+            const navigatePath = chain === '1' ? '/ethsearchresults' : '/solsearchresults';
+            navigate(navigatePath, { state: { results: data, userWallet } });
+        } catch (error) {
+            console.error('Errore nella ricerca:', error);
+            navigate(chain === '1' ? '/ethsearchresults' : '/solsearchresults', { state: { results: [] } });
+        }
     };
+
 
     return (
         <form onSubmit={handleSubmit} className="mb-4">
