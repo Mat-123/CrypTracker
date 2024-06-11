@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { LOGOUT } from '../redux/actions';
-import UserSettings from '../Pages/UserSettings';
+
 
 const Navbar = () => {
     const dispatch = useDispatch();
@@ -75,6 +75,7 @@ const Navbar = () => {
 
                             <ul className="dropdown-menu">
                                 <li><Link className="dropdown-item" to="/profile">Settings</Link></li>
+                                <li><Link className="dropdown-item" aria-current="page" to="/faq">FAQ</Link></li>
                             </ul>
                         </div>
                             

@@ -17,7 +17,7 @@ const Wallet = () => {
           } else if (error.response && error.response.status === 405) {
             navigate('/login');
           }
-           else {
+            else {
               console.error('An error occurred:', error);
           }
       });

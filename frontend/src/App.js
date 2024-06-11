@@ -19,6 +19,7 @@ import Wallet from './Pages/Wallet';
 import Transactions from './Pages/Transactions';
 import NftSearchForm from './Components/NftSearchForm';
 import UserSettings from './Pages/UserSettings';
+import Faq from './Pages/Faq';
 
 
 function App() {
@@ -26,7 +27,6 @@ function App() {
   axios.defaults.withXSRFToken = true;
 
   const dispatch = useDispatch();
-  const [user, setUser] = useState(null);
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
@@ -36,7 +36,6 @@ function App() {
                   type: LOGIN,
                   payload: res.data,
               });
-              setUser(res.data);
             })
           .catch((err) => console.log(err))
           .finally(() => setLoaded(true));
@@ -60,6 +59,7 @@ function App() {
                     <Route path='/wallet' element={<Wallet />} />
                     <Route path="/transactions/:id_crypto" element={<Transactions />} />
                     <Route path='/profile' element={<UserSettings />} />
+                    <Route path='/faq' element={<Faq />} />
                   </Route>
 
                   <Route element={<GuestRoutes />}>

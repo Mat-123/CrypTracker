@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 function NftSearchForm() {
     const [query, setQuery] = useState('');
     const navigate = useNavigate();
+    const [chain, setChain] = useState('');
     const [error, setError] = useState('');
     const [userWallet, setUserWallet] = useState([]);
 
@@ -29,17 +30,26 @@ useEffect(() => {
             return;
         }
 
+        if (!chain) {
+            setError('Seleziona una chain.');
+            return;
+        }
+
         setError('');
 
 
-        fetch(`/api/v1/crypto?query=${query}`)
+        const endpoint = chain === '1' 
+            ? `https://api-mainnet.magiceden.dev/v3/rtp/ethereum/collections/v7?name=${query}`
+            : `https://api-mainnet.magiceden.dev/v2/collections/${query}/stats`;
+
+        fetch(endpoint)
             .then((response) => response.json())
             .then((data) => {
-                navigate('/results', { state: { results: data.data, userWallet } }); // Naviga alla pagina dei risultati con i dati della ricerca
+                navigate('/nftresults', { state: { results: data.data, userWallet } });
             })
             .catch((error) => {
                 console.error('Errore nella ricerca:', error);
-                navigate('/results', { state: { results: [] } }); // Naviga alla pagina dei risultati con un array vuoto in caso di errore
+                navigate('/nftresults', { state: { results: [] } });
             });
     };
 
@@ -53,6 +63,16 @@ useEffect(() => {
                     value={query}
                     onChange={(e) => setQuery(e.target.value)}
                 />
+                <select
+                    className="form-select mt-2"
+                    aria-label="Default select example"
+                    value={chain}
+                    onChange={(e) => setChain(e.target.value)}
+                >
+                    <option value="" selected>Select the chain</option>
+                    <option value="1">Ethereum</option>
+                    <option value="2">Solana</option>
+                </select>
                 {error && <div className="text-danger mt-2">{error}</div>}
             </div>
             <button type="submit" className="btn btn-primary mt-3">Cerca</button>

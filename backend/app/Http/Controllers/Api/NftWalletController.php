@@ -40,16 +40,15 @@ class NftWalletController extends Controller
     {
         $userId = Auth::id();
         $validatedData = $request->validate([
-            'id_crypto' => 'required|integer',
             'nft_name' =>  'nullable|string|max:255',
-            'slug_nft' =>  'nullable|string|max:255',
+            'slug_nft' =>  'required|string|max:255',
             'chain' =>  'nullable|string|max:255',
 
         ]);
         $validatedData['user_id'] = $userId;
         $addWallet = NftWallet::create($validatedData);
 
-        return response()->json(['message' => 'Crypto added to Wallet successfully', 'addwallet' => $addWallet], 201);
+        return response()->json(['message' => 'NFT added to Wallet successfully', 'addwallet' => $addWallet], 201);
     }
 
     /**

@@ -35,11 +35,11 @@ useEffect(() => {
         fetch(`/api/v1/crypto?query=${query}`)
             .then((response) => response.json())
             .then((data) => {
-                navigate('/results', { state: { results: data.data, userWallet } }); // Naviga alla pagina dei risultati con i dati della ricerca
+                navigate('/results', { state: { results: data.data, userWallet } });
             })
             .catch((error) => {
                 console.error('Errore nella ricerca:', error);
-                navigate('/results', { state: { results: [] } }); // Naviga alla pagina dei risultati con un array vuoto in caso di errore
+                navigate('/results', { state: { results: [] } });
             });
     };
 
