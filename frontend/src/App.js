@@ -17,6 +17,8 @@ import ProtectedRoutes from './Pages/ProtectedRoutes';
 import Error404 from './Pages/Error404';
 import Wallet from './Pages/Wallet';
 import Transactions from './Pages/Transactions';
+import NftSearchForm from './Components/NftSearchForm';
+import UserSettings from './Pages/UserSettings';
 
 
 function App() {
@@ -24,16 +26,18 @@ function App() {
   axios.defaults.withXSRFToken = true;
 
   const dispatch = useDispatch();
+  const [user, setUser] = useState(null);
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
       axios('/api/user')
-          .then((res) =>
+          .then((res) => {
               dispatch({
                   type: LOGIN,
                   payload: res.data,
-              })
-          )
+              });
+              setUser(res.data);
+            })
           .catch((err) => console.log(err))
           .finally(() => setLoaded(true));
   }, [dispatch]);
@@ -51,9 +55,11 @@ function App() {
 
                   <Route element={<ProtectedRoutes />}>
                     <Route path="/crypto" element={<SearchForm />} />
+                    <Route path='/nft' element={<NftSearchForm />} />
                     <Route path="/results" element={<Results />} />
                     <Route path='/wallet' element={<Wallet />} />
                     <Route path="/transactions/:id_crypto" element={<Transactions />} />
+                    <Route path='/profile' element={<UserSettings />} />
                   </Route>
 
                   <Route element={<GuestRoutes />}>

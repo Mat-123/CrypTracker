@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { LOGOUT } from '../redux/actions';
+import UserSettings from '../Pages/UserSettings';
 
 const Navbar = () => {
     const dispatch = useDispatch();
@@ -58,13 +59,25 @@ const Navbar = () => {
                         <Link className="nav-link" aria-current="page" to="/crypto">Crypto</Link>
                     </li>
                     <li className="nav-item">
+                        <Link className="nav-link" aria-current="page" to="/nft">NFT</Link>
+                    </li>
+                    <li className="nav-item">
                         <Link className="nav-link" aria-current="page" to="/wallet">Wallet</Link>
                     </li>
                     </ul>
 
                     {user ? (
                         <>
-                            <span className="me-2 text-white">{user.name}</span>
+                        <div className="dropdown">
+                            <Link className="btn btn-dark dropdown-toggle me-3" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                {user.name}
+                            </Link>
+
+                            <ul className="dropdown-menu">
+                                <li><Link className="dropdown-item" to="/profile">Settings</Link></li>
+                            </ul>
+                        </div>
+                            
                             <button
                                 className="btn btn-primary"
                                 onClick={logout}

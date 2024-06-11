@@ -7,7 +7,7 @@ use App\Http\Controllers\Api\NftTransactionController;
 use App\Http\Controllers\Api\NftWalletController;
 use App\Http\Controllers\Api\WalletController;
 use App\Http\Controllers\Api\TransactionController;
-use App\Models\NftTransaction;
+use App\Http\Controllers\Api\ProfileController;
 
 Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
     return $request->user();
@@ -27,4 +27,6 @@ Route::name('api.')->prefix('v1')->middleware(['auth:sanctum'])->group(function 
     Route::get('/nfttransaction/{slugName}', [NftTransactionController::class, 'index'])->name('nfttransaction.index');
     Route::post('/nfttransaction/{nftTransaction}', [NftTransactionController::class, 'update'])->name('nfttransaction.update');
     Route::delete('/nfttransaction/{nftTransaction}', [NftTransactionController::class, 'destroy'])->name('nfttransaction.destroy');
+    Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
+    Route::put('/profile', [ProfileController::class, 'updateCmcApiKey'])->name('profile.updateCmcApiKey');
 });

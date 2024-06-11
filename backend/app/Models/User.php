@@ -8,10 +8,11 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable;
+    use HasFactory, HasApiTokens, Notifiable;
 
 
     /**
@@ -23,6 +24,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'cmc_api_key',
     ];
 
     /**
@@ -61,5 +63,15 @@ class User extends Authenticatable
     public function NftWallets(): HasMany
     {
         return $this->hasMany(NftWallet::class);
+    }
+
+    public function setRoleAttribute($value)
+    {
+        //
+    }
+
+    public function setPremiumExpiryAttribute($value)
+    {
+        //
     }
 }

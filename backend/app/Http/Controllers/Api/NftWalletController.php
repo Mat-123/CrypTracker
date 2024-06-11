@@ -48,6 +48,8 @@ class NftWalletController extends Controller
         ]);
         $validatedData['user_id'] = $userId;
         $addWallet = NftWallet::create($validatedData);
+
+        return response()->json(['message' => 'Crypto added to Wallet successfully', 'addwallet' => $addWallet], 201);
     }
 
     /**

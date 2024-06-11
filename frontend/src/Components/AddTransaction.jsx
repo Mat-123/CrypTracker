@@ -73,32 +73,42 @@ const AddTransaction = ({ isOpen, onClose, id_crypto }) => {
         setActiveButton(type);
     };
 
+    const handleClose = () => {
+        setActiveButton(null);
+        onClose();
+    };
+
     return (
         <div className={`modal fade ${isOpen ? 'show d-block' : ''}`} tabIndex="-1" role="dialog">
             <div className="modal-dialog" role="document">
                 <div className="modal-content">
                     <div className="modal-header">
                         <h5 className="modal-title">Create Transaction</h5>
-                        <button type="button" className="btn-close" onClick={onClose}></button>
+                        <button type="button" className="btn-close" onClick={handleClose}></button>
                     </div>
                     <div className="modal-body">
                         <form>
                             <p>Select transaction type:</p>
                             <div className="d-flex justify-content-between">
-                                <button
-                                    type="button"
-                                    className={`btn ${activeButton === 0 ? 'btn-dark' : 'btn-success'}`}
-                                    onClick={() => handleTransactionTypeClick(0)}
-                                >
-                                    Buy
-                                </button>
-                                <button
-                                    type="button"
-                                    className={`btn ${activeButton === 1 ? 'btn-dark' : 'btn-danger'}`}
-                                    onClick={() => handleTransactionTypeClick(1)}
-                                >
-                                    Sell
-                                </button>
+                            <button
+                                type="button"
+                                className={`btn ${activeButton === 0 ? 'btn-success' : activeButton === 1 ? 'btn-secondary' : 'btn-success'}`}
+                                data-bs-toggle="button"
+                                aria-pressed={activeButton === 0}
+                                onClick={() => handleTransactionTypeClick(0)}
+                            >
+                                Buy
+                            </button>
+                            <button
+                                type="button"
+                                className={`btn ${activeButton === 1 ? 'btn-danger' : activeButton === 0 ? 'btn-secondary' : 'btn-danger'}`}
+                                data-bs-toggle="button"
+                                aria-pressed={activeButton === 1}
+                                onClick={() => handleTransactionTypeClick(1)}
+                            >
+                                Sell
+                            </button>
+
                             </div>
                             <div className="mb-3">
                                 <label className="form-label">Quantity</label>
@@ -124,7 +134,7 @@ const AddTransaction = ({ isOpen, onClose, id_crypto }) => {
                         </form>
                     </div>
                     <div className="modal-footer">
-                        <button type="button" className="btn btn-secondary" onClick={onClose}>Close</button>
+                        <button type="button" className="btn btn-secondary" onClick={handleClose}>Close</button>
                     </div>
                 </div>
             </div>
