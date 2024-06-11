@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StoreNftWalletRequest;
 use App\Http\Requests\UpdateNftWalletRequest;
+use App\Models\NftTransaction;
 
 class NftWalletController extends Controller
 {
@@ -76,8 +77,22 @@ class NftWalletController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(NftWallet $nftWallet)
+    public function destroy($slugNft)
     {
-        //
+        $userId = Auth::id();
+        $nftWallet = NftWallet::where('user_id', $userId)
+            ->where('slug_nft', $slugNft)->first();
+
+        if ($nftWallet) {
+            NftTransaction::where('user_id', $userId)
+                ->where('slug_nft', $slugNft)
+                ->delete();
+
+            $nftWallet->delete();
+
+            return response()->json(['message' => 'Portafoglio e transazioni cancellati con successo'], 200);
+        } else {
+            return response()->json(['message' => 'Portafoglio non trovato'], 404);
+        }
     }
 }

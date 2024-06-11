@@ -3,10 +3,11 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\MapController;
+use App\Http\Controllers\Api\NftTransactionController;
 use App\Http\Controllers\Api\NftWalletController;
 use App\Http\Controllers\Api\WalletController;
 use App\Http\Controllers\Api\TransactionController;
-
+use App\Models\NftTransaction;
 
 Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
     return $request->user();
@@ -23,4 +24,7 @@ Route::name('api.')->prefix('v1')->middleware(['auth:sanctum'])->group(function 
     Route::delete('/transaction/{transaction}', [TransactionController::class, 'destroy'])->name('transaction.destroy');
     Route::get('/nftwallet', [NftWalletController::class, 'index'])->name('nftwallet.index');
     Route::post('/nftwallet', [NftWalletController::class, 'store'])->name('nftwallet.store');
+    Route::get('/nfttransaction/{slugName}', [NftTransactionController::class, 'index'])->name('nfttransaction.index');
+    Route::post('/nfttransaction/{nftTransaction}', [NftTransactionController::class, 'update'])->name('nfttransaction.update');
+    Route::delete('/nfttransaction/{nftTransaction}', [NftTransactionController::class, 'destroy'])->name('nfttransaction.destroy');
 });
