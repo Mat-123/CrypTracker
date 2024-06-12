@@ -1,9 +1,13 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
+import { Doughnut } from 'react-chartjs-2';
+import 'chart.js/auto';
+import ChartModal from "../Components/ChartModal";
 
 const Wallet = () => {
   const [cryptos, setCryptos] = useState([]);
+  const [showModal, setShowModal] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -74,16 +78,42 @@ const Wallet = () => {
   const { cryptoQuantities, cryptoInfo, transactionCounts } = calculateCryptoQuantities(cryptos);
   const totalValues = calculateTotalValues(cryptos, cryptoQuantities);
 
+  const chartData = {
+    labels: Object.values(cryptoInfo).map(info => info.name),
+    datasets: [
+      {
+        data: Object.values(totalValues),
+        backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF'],
+        hoverBackgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF']
+      }
+    ],
+  };
+
+  const chartOptions = {
+    plugins: {
+      legend: {
+        labels: {
+          color: '#FFFFFF',
+          font: {
+            size: 16
+          }
+        }
+      }
+    }
+  };
+
+
   return (
     <>
+    <h1 className="text-white mt-5">My Crypto Wallet</h1>
+    <div className="row mt-5">
     <div className="col-2">
 
     </div>
     <div className="col-8">
-    <div className="text-white mt-5">
-      <h1>My Crypto Wallet</h1>
+    <div className="text-white mt-3">
         {Object.entries(cryptoQuantities).map(([id_crypto, quantity]) => (
-          <div className="card card-bg-color text-white my-3 rounded-4" key={id_crypto}>
+          <div className="card card-bg-color text-white mb-3 rounded-4" key={id_crypto}>
             <div className="card-body d-flex justify-content-between align-items-center">
               <div>
             {cryptoInfo[id_crypto].name}: {quantity} {cryptoInfo[id_crypto].symbol} - Total Value: {totalValues[id_crypto]} USD - Total Transactions: {transactionCounts[id_crypto]}
@@ -98,6 +128,15 @@ const Wallet = () => {
         ))}
     </div>
     </div>
+    <div className="col-2">
+      <div className="card card-bg-color text-white my-3 rounded-4">
+      <div className="my-3" onClick={() => setShowModal(true)} style={{ cursor: 'pointer' }}>
+          <Doughnut data={chartData} options={chartOptions} />
+        </div>
+    </div>
+    </div>
+    </div>
+    <ChartModal show={showModal} onClose={() => setShowModal(false)} chartData={chartData} options={chartOptions} />
     </>
   );
 }

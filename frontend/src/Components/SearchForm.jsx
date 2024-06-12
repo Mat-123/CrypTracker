@@ -49,8 +49,8 @@ useEffect(() => {
 
     </div>
     <div className="col-8">
-        <div class="card card-bg-color rounded-4 text-white mt-5">
-            <div class="card-body">
+        <div className="card card-bg-color rounded-4 text-white mt-5">
+            <div className="card-body">
         <form onSubmit={handleSubmit} className="mb-4">
             <div className="form-group mt-5">
                 <input

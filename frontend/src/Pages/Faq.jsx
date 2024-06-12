@@ -5,19 +5,18 @@ const Faq = () => {
     <div className="col-2">
 
     </div>
-    <div className="col-8">
-        <div className="card mt-5" >
-            <ul className="list-group list-group-flush">
-                <li className="list-group-item">
-                    <button className="btn btn-link" type="button" data-bs-toggle="collapse" data-bs-target="#whatIsSlug" aria-expanded="false" aria-controls="collapseExample">
+    <div className="col-8 mt-5">
+            <ul className="list-group list-group-flush rounded-4">
+                <li className="list-group-item card-bg-color text-white">
+                    <button className="btn btn-link link-light" type="button" data-bs-toggle="collapse" data-bs-target="#whatIsSlug" aria-expanded="false" aria-controls="collapseExample">
                         What is a slug?
                     </button>
                     <div className="collapse" id="whatIsSlug">
                     The data used on this website for NFTs are provided by MagicEden, which currently for SOLANA NFTs collections does not support searching by the name of the collection but only via slug. The slug is made up of one or more words and represents a part of the URL, usually consisting of one or more words written in lowercase. For example, ‘degods’ or ‘mad_lads’.
                     </div>
                 </li>
-                <li className="list-group-item">
-                    <button className="btn btn-link" type="button" data-bs-toggle="collapse" data-bs-target="#findSlug" aria-expanded="false" aria-controls="collapseExample">
+                <li className="list-group-item card-bg-color">
+                    <button className="btn btn-link link-light" type="button" data-bs-toggle="collapse" data-bs-target="#findSlug" aria-expanded="false" aria-controls="collapseExample">
                         How to find the correct slug?
                     </button>
                     <div className="collapse" id="findSlug">
@@ -28,7 +27,6 @@ const Faq = () => {
                     </div>
                 </li>
             </ul>
-        </div>
         </div>
         </>
     )

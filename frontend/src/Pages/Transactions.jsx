@@ -127,15 +127,15 @@ const Transactions = () => {
           <div className="row">
           <div className="col-4 text-start">
               <p>Holdings: {holdings}</p>
-              <p>Holdings Value: {holdingsValue.toFixed(2)}</p>
+              <p>Holdings Value: {holdingsValue.toFixed(2)} USD</p>
             </div>
             <div className="col-4 text-start">
-              <p>Total Cost: {totalSpent.toFixed(2)}</p>
-              <p>Average Net Cost: {averageNetCost.toFixed(2)}</p>
+              <p>Total Cost: {totalSpent.toFixed(2)} USD</p>
+              <p>Average Net Cost: {averageNetCost.toFixed(2)} USD</p>
             </div>
             <div className="col-4 text-start">
               <p className={pnl >= 0 ? 'text-success' : 'text-danger'}>
-                PNL: {pnl.toFixed(2)} ({pnlPercentage.toFixed(2)}%)
+                PNL: {pnl.toFixed(2)} USD ({pnlPercentage.toFixed(2)}%)
               </p>
             </div>
           </div>
@@ -147,7 +147,7 @@ const Transactions = () => {
       <button className="btn btn-danger rounded-3 ms-3" onClick={handleDeleteCrypto}>Remove Crypto</button>
 
       <div className="card card-bg-color text-white my-3 rounded-4">
-      <ul className="list-group list-group-flush">
+      <ul className="list-group list-group-flush rounded-4">
         {transactions.map((transaction) => (
           <li className="list-group-item card-bg-color text-white d-flex justify-content-between align-items-center" key={transaction.id}>
           <div className="row w-100">
@@ -158,7 +158,7 @@ const Transactions = () => {
               <span>Quantity: {parseFloat(transaction.quantity).toString()}</span>
             </div>
             <div className="col d-flex align-items-center">
-              <span>Transaction Price: {parseFloat(transaction.transaction_price).toString()}</span>
+              <span>Transaction Price: {parseFloat(transaction.transaction_price).toString()} USD</span>
             </div>
             <div className="col d-flex justify-content-end align-items-center">
               <button className="btn manage-btn rounded-3 me-3" onClick={() => openEditModal(transaction)}>Edit</button>
