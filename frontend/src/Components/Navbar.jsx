@@ -58,9 +58,9 @@ const Navbar = () => {
                     <li className="nav-item">
                         <Link className="nav-link" aria-current="page" to="/crypto">Crypto</Link>
                     </li>
-                    <li className="nav-item">
+                    {/* <li className="nav-item">
                         <Link className="nav-link" aria-current="page" to="/nft">NFT</Link>
-                    </li>
+                    </li> */}
                     <li className="nav-item">
                         <Link className="nav-link" aria-current="page" to="/wallet">Wallet</Link>
                     </li>
@@ -73,18 +73,20 @@ const Navbar = () => {
                                 {user.name}
                             </Link>
 
-                            <ul className="dropdown-menu">
+                            <ul className="dropdown-menu dropdown-menu-end">
                                 <li><Link className="dropdown-item" to="/profile">Settings</Link></li>
                                 <li><Link className="dropdown-item" aria-current="page" to="/faq">FAQ</Link></li>
+                                <li><hr className="dropdown-divider" /></li>
+                                <li>
+                                    <button
+                                        className="dropdown-item btn btn-link"
+                                        onClick={logout}
+                                    >
+                                        Logout
+                                    </button>
+                                </li>
                             </ul>
                         </div>
-                            
-                            <button
-                                className="btn btn-primary"
-                                onClick={logout}
-                            >
-                                Logout
-                            </button>
                         </>
                     ) : (
                         <>
