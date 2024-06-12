@@ -92,12 +92,18 @@ const Wallet = () => {
   const chartOptions = {
     plugins: {
       legend: {
+        position: 'bottom',
         labels: {
           color: '#FFFFFF',
           font: {
             size: 16
           }
         }
+      }
+    },
+    layout: {
+      padding: {
+        top: 20
       }
     }
   };

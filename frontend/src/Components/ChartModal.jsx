@@ -13,7 +13,8 @@ const ChartModal = ({ show, onClose, chartData }) => {
           }
         }
       }
-    }
+    },
+    cutout: '70%',
   };
 
   return (
