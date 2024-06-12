@@ -1,0 +1,61 @@
+.main-bg-color {
+    background-color: #222831 !important;
+}
+
+.card-bg-color {
+    background-color: #31363F;
+}
+
+.text-white {
+    color: white;
+}
+
+.manage-btn {
+    background-color: #F0BB6C;
+    color: #31363F;
+}
+
+.badge {
+    min-width: 60px;
+    text-align: center;
+}
+
+.flex-shrink-0 {
+    flex-shrink: 0;
+}
+
+input {
+    color-scheme: dark;
+}
+input:focus[type=text],
+input:focus[type=date],
+input:focus[type=number],
+input:focus[type=email],
+input:focus[type=password] {
+    background-color: #31363F;
+    border-color: #F0BB6C;
+    box-shadow: none;
+    outline: none;
+}
+
+input[type="text"][disabled] {
+    color: darkgray;
+}
+
+.form-control::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: #808080;
+    opacity: 1; /* Firefox */
+}
+
+.form-control:-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color: #808080;
+}
+
+.form-control::-ms-input-placeholder { /* Microsoft Edge */
+    color: #808080;
+}
+
+.form-control:disabled { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    background-color: #808080;
+    opacity: 1; /* Firefox */
+}

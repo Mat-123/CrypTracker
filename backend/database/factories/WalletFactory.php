@@ -25,6 +25,8 @@ class WalletFactory extends Factory
             'user_id' => fake()->randomElement($iduser),
             'id_crypto' => fake()->randomElement($idcrypto),
             'name_crypto' => fake()->randomElement($namecrypto),
+            'symbol' => fake()->stateAbbr(),
+            'last_value' => fake()->randomNumber(5, false),
         ];
     }
 }

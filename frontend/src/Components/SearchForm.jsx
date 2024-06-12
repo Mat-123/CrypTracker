@@ -44,19 +44,30 @@ useEffect(() => {
     };
 
     return (
+        <>
+    <div className="col-2">
+
+    </div>
+    <div className="col-8">
+        <div class="card card-bg-color rounded-4 text-white mt-5">
+            <div class="card-body">
         <form onSubmit={handleSubmit} className="mb-4">
             <div className="form-group mt-5">
                 <input
                     type="text"
-                    className="form-control"
-                    placeholder="Cerca..."
+                    className="form-control card-bg-color text-white"
+                    placeholder="Search crypto..."
                     value={query}
                     onChange={(e) => setQuery(e.target.value)}
                 />
                 {error && <div className="text-danger mt-2">{error}</div>}
             </div>
-            <button type="submit" className="btn btn-primary mt-3">Cerca</button>
+            <button type="submit" className="btn manage-btn mt-3">Search</button>
         </form>
+        </div>
+        </div>
+        </div>
+        </>
     );
 }
 

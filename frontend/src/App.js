@@ -20,6 +20,7 @@ import Transactions from './Pages/Transactions';
 // import NftSearchForm from './Components/NftSearchForm';
 import UserSettings from './Pages/UserSettings';
 import Faq from './Pages/Faq';
+import "../src/Style/index.css"
 // import SolSearchResults from './Components/SolSearchResults';
 // import EthSearchResults from './Components/EthSearchResults';
 
@@ -50,7 +51,6 @@ function App() {
         <div className="App">
           <div className="container">
             <div className="row">
-              <div className="col-8 mx-auto">
                 <Routes>
                   <Route path="/" element={<Home />} />
 
@@ -74,7 +74,6 @@ function App() {
                   <Route path="/404" element={<Error404 />} />
                   <Route path="*" element={<Navigate to="/404" />} />
                 </Routes>
-              </div>
             </div>
           </div>
         </div>

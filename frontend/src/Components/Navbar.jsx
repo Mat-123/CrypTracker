@@ -37,7 +37,7 @@ const Navbar = () => {
       }, [navigate]);
 
     return (
-        <nav className="navbar navbar-expand-lg bg-dark" data-bs-theme="dark">
+        <nav className="navbar navbar-expand-lg bg-dark main-bg-color" data-bs-theme="dark">
             <div className="container-fluid">
                 <Link className="navbar-brand" to="/">
                     Cryptracker
@@ -69,11 +69,11 @@ const Navbar = () => {
                     {user ? (
                         <>
                         <div className="dropdown">
-                            <Link className="btn btn-dark dropdown-toggle me-3" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <Link className="btn btn-dark dropdown-toggle me-3 main-bg-color" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 {user.name}
                             </Link>
 
-                            <ul className="dropdown-menu dropdown-menu-end">
+                            <ul className="dropdown-menu dropdown-menu-end main-bg-color">
                                 <li><Link className="dropdown-item" to="/profile">Settings</Link></li>
                                 <li><Link className="dropdown-item" aria-current="page" to="/faq">FAQ</Link></li>
                                 <li><hr className="dropdown-divider" /></li>
@@ -90,10 +90,10 @@ const Navbar = () => {
                         </>
                     ) : (
                         <>
-                            <Link className="btn btn-primary me-2" to="/login">
+                            <Link className="btn manage-btn rounded-3 me-3" to="/login">
                                 Login
                             </Link>
-                            <Link className="btn btn-primary" to="/register">
+                            <Link className="btn manage-btn rounded-3" to="/register">
                                 Register
                             </Link>
                         </>

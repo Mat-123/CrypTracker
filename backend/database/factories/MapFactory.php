@@ -20,6 +20,7 @@ class MapFactory extends Factory
             'id_crypto' =>  fake()->unique()->randomNumber(2, false),
             'name_crypto' => fake()->word(),
             'slug_crypto' => fake()->word(),
+            'symbol' => fake()->stateAbbr(),
             'fetch_price' => fake()->boolean(),
         ];
     }

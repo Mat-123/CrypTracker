@@ -54,26 +54,33 @@ const UserSettings = () => {
     }
 
     return (
-        <div className="card mt-5">
+        <>
+    <div className="col-2">
+
+    </div>
+    <div className="col-8">
+        <div className="card mt-5 card-bg-color text-white">
             <div className="card-header">
                 User's Settings
             </div>
             <div className="card-body">
                 <div className="mb-3">
                     <label htmlFor='userType' className='form-label'>User Type:</label>
-                    <input className='form-control' id='userType' type='text' value={user.role} disabled readOnly></input>
+                    <input className='form-control card-bg-color text-white' id='userType' type='text' value={user.role} disabled readOnly></input>
                 </div>
                 <div className="mb-3">
                     <label htmlFor='premiumExpiry' className='form-label'>Premium Expiry:</label>
-                    <input className='form-control' id='premiumExpiry' type='text' value={user.premium_expiry ? formatDate(user.premium_expiry) : ''} disabled readOnly></input>
+                    <input className='form-control card-bg-color text-white' id='premiumExpiry' type='text' value={user.premium_expiry ? formatDate(user.premium_expiry) : ''} disabled readOnly></input>
                 </div>
                 <div className="mb-3">
                     <label htmlFor='cmcApiKey' className='form-label'>CMC API KEY:</label>
-                    <input className='form-control' id='cmcApiKey' name='cmc_api_key' type='text' value={formData.cmc_api_key} onChange={handleChange}></input>
+                    <input className='form-control card-bg-color text-white' id='cmcApiKey' name='cmc_api_key' type='text' value={formData.cmc_api_key} onChange={handleChange}></input>
                 </div>
-                <button type="button" className="btn btn-primary" onClick={saveChanges}>Save changes</button>
+                <button type="button" className="btn btn-success" onClick={saveChanges}>Save changes</button>
             </div>
         </div>
+        </div>
+    </>
     );
 }
 

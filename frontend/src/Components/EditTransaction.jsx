@@ -53,9 +53,9 @@ const EditTransaction = ({ isOpen, onClose, transaction }) => {
     if (!isOpen || !transaction) return null;
 
     return (
-        <div className="modal fade show d-block" tabIndex="-1" role="dialog">
+        <div className="modal fade show d-block " tabIndex="-1" role="dialog">
             <div className="modal-dialog" role="document">
-                <div className="modal-content">
+                <div className="modal-content card-bg-color">
                     <div className="modal-header">
                         <h5 className="modal-title">Edit Transaction</h5>
                     </div>
@@ -63,29 +63,29 @@ const EditTransaction = ({ isOpen, onClose, transaction }) => {
                         <form>
                             <div className="form-group">
                                 <label htmlFor="quantity">Quantity</label>
-                                <input type="number" className="form-control" id="quantity" name="quantity" value={formData.quantity} onChange={handleChange} />
+                                <input type="number" className="form-control card-bg-color text-white" id="quantity" name="quantity" value={formData.quantity} onChange={handleChange} />
                             </div>
                             <div className="form-group">
                                 <label htmlFor="transactionPrice">Transaction Price</label>
-                                <input type="number" className="form-control" id="transactionPrice" name="transaction_price" value={formData.transaction_price} onChange={handleChange} />
+                                <input type="number" className="form-control card-bg-color text-white" id="transactionPrice" name="transaction_price" value={formData.transaction_price} onChange={handleChange} />
                             </div>
                             <div className="form-group">
                                 <label htmlFor="totalSpent">Total Spent</label>
-                                <input type="number" className="form-control" id="totalSpent" name="total_spent" value={formData.total_spent} onChange={handleChange} />
+                                <input type="number" className="form-control card-bg-color text-white" id="totalSpent" name="total_spent" value={parseFloat(formData.total_spent).toString()} onChange={handleChange} />
                             </div>
                             <div className="form-group">
                                 <label htmlFor="transactionDate">Transaction Date</label>
-                                <input type="date" className="form-control" id="transactionDate" name="transaction_date" value={formData.transaction_date} onChange={handleChange} />
+                                <input type="date" className="form-control card-bg-color text-white" id="transactionDate" name="transaction_date" value={formData.transaction_date} onChange={handleChange} />
                             </div>
                             <div className="form-group">
                                 <label htmlFor="wallet">Wallet</label>
-                                <input type="text" className="form-control" id="wallet" name="wallet" value={formData.wallet} onChange={handleChange} />
+                                <input type="text" className="form-control card-bg-color text-white w-c" id="wallet" name="wallet" value={formData.wallet} onChange={handleChange} />
                             </div>
                         </form>
                     </div>
                     <div className="modal-footer">
                         <button type="button" className="btn btn-secondary" onClick={onClose}>Close</button>
-                        <button type="button" className="btn btn-primary" onClick={handleSaveChanges}>Save changes</button>
+                        <button type="button" className="btn btn-success" onClick={handleSaveChanges}>Save changes</button>
                     </div>
                 </div>
             </div>

@@ -17,6 +17,7 @@ class Wallet extends Model
         'id_crypto',
         'user_id',
         'name_crypto',
+        'symbol',
         'last_value',
     ];
 

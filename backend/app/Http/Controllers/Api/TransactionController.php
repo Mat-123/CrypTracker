@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Models\Transaction;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StoreTransactionRequest;
@@ -34,9 +35,9 @@ class TransactionController extends Controller
         $userId = Auth::id();
         $validatedData = $request->validate([
             'id_crypto' => 'required|integer',
-            'quantity' => 'required|integer',
-            'transaction_price' => 'required|integer',
-            'total_spent' => 'required|integer',
+            'quantity' => 'required|numeric',
+            'transaction_price' => 'required|numeric',
+            'total_spent' => 'required|numeric',
             'transaction_date' => 'required|date',
             'transaction_type' => 'required|integer',
             'wallet' =>  'nullable|string|max:255',
@@ -99,8 +100,11 @@ class TransactionController extends Controller
     public function getTransactionsByUserAndCryptoId($cryptoId)
     {
         $userId = Auth::id();
-        $transactions = Transaction::where('user_id', $userId)
-            ->where('id_crypto', $cryptoId)
+        $transactions = DB::table('transactions')
+            ->join('maps', 'transactions.id_crypto', '=', 'maps.id_crypto')
+            ->where('transactions.user_id', $userId)
+            ->where('transactions.id_crypto', $cryptoId)
+            ->select('transactions.*', 'maps.last_value')
             ->get();
 
         return $transactions;

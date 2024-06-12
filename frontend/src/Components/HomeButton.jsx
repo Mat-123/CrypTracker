@@ -8,8 +8,8 @@ const HomeButton = () => {
   };
 
   return (
-    <button className='btn btn-primary' onClick={handleClick}>
-      Torna alla Homepage
+    <button className='btn manage-btn rounded-3' onClick={handleClick}>
+      Back To Homepage
     </button>
   );
 };

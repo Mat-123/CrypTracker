@@ -33,8 +33,13 @@ function Results() {
     };
 
     return (
-        <div>
-            <h1 className="my-4">Risultati della Ricerca</h1>
+        <>
+    <div className="col-2">
+
+    </div>
+    <div className="col-8">
+        <div className='mt-5'>
+            <h1>Risultati della Ricerca</h1>
             <div className="results">
                 {results.length > 0 ? (
                     <ul className="list-group">
@@ -58,6 +63,8 @@ function Results() {
             </div>
             <Link to="/crypto" className="btn btn-secondary mt-4">Torna alla ricerca</Link>
         </div>
+        </div>
+        </>
     );
 }
 

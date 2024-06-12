@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
-const AddTransaction = ({ isOpen, onClose, id_crypto }) => {
+const AddTransaction = ({ isOpen, onClose, id_crypto, onCreateTransaction }) => {
 
     const [formData, setFormData] = useState({
         quantity: '',
@@ -23,12 +23,12 @@ const AddTransaction = ({ isOpen, onClose, id_crypto }) => {
     }, []);
 
     useEffect(() => {
-        // Automatically calculate total_spent whenever quantity or transaction_price change
         const { quantity, transaction_price } = formData;
         if (quantity && transaction_price) {
+            const totalSpent = (quantity * transaction_price).toFixed(2);
             setFormData((prevFormData) => ({
                 ...prevFormData,
-                total_spent: quantity * transaction_price
+                total_spent: totalSpent
             }));
         }
     }, [formData.quantity, formData.transaction_price]);
@@ -39,6 +39,18 @@ const AddTransaction = ({ isOpen, onClose, id_crypto }) => {
             ...formData,
             [name]: value
         });
+    };
+
+    const resetForm = () => {
+        setFormData({
+            quantity: '',
+            transaction_price: '',
+            total_spent: '',
+            transaction_date: new Date().toISOString().split('T')[0], // Reimposta la data corrente
+            transaction_type: null,
+            wallet: '',
+        });
+        setActiveButton(null); // Reimposta il pulsante attivo
     };
 
     const handleCreateTransaction = async () => {
@@ -59,7 +71,9 @@ const AddTransaction = ({ isOpen, onClose, id_crypto }) => {
                 }
             });
             console.log('Transaction created successfully:', response.data);
+            resetForm();
             onClose();
+            onCreateTransaction();
         } catch (error) {
             console.error('Error creating transaction:', error);
         }
@@ -92,7 +106,7 @@ const AddTransaction = ({ isOpen, onClose, id_crypto }) => {
                             <div className="d-flex justify-content-between">
                             <button
                                 type="button"
-                                className={`btn ${activeButton === 0 ? 'btn-success' : activeButton === 1 ? 'btn-secondary' : 'btn-success'}`}
+                                className={`btn ${activeButton === 0 ? 'btn-success' : activeButton === 1 ? 'btn-secondary' : 'btn-success'} rounded-3`}
                                 data-bs-toggle="button"
                                 aria-pressed={activeButton === 0}
                                 onClick={() => handleTransactionTypeClick(0)}
@@ -101,7 +115,7 @@ const AddTransaction = ({ isOpen, onClose, id_crypto }) => {
                             </button>
                             <button
                                 type="button"
-                                className={`btn ${activeButton === 1 ? 'btn-danger' : activeButton === 0 ? 'btn-secondary' : 'btn-danger'}`}
+                                className={`btn ${activeButton === 1 ? 'btn-danger' : activeButton === 0 ? 'btn-secondary' : 'btn-danger'} rounded-3`}
                                 data-bs-toggle="button"
                                 aria-pressed={activeButton === 1}
                                 onClick={() => handleTransactionTypeClick(1)}

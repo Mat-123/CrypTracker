@@ -42,6 +42,13 @@ const Login = () => {
     };
 
     return (
+        <>
+    <div className="col-2">
+
+    </div>
+    <div className="col-8">
+        <div class="card card-bg-color rounded-4 text-white mt-5">
+            <div class="card-body">
         <form onSubmit={(ev) => submitLogin(ev)} noValidate>
             <div className="mb-3">
                 <label htmlFor="email" className="form-label">
@@ -49,7 +56,7 @@ const Login = () => {
                 </label>
                 <input
                     type="email"
-                    className="form-control"
+                    className="form-control card-bg-color text-white"
                     id="email"
                     name="email"
                     onChange={(ev) => updateInputValue(ev)}
@@ -62,7 +69,7 @@ const Login = () => {
                 </label>
                 <input
                     type="password"
-                    className="form-control"
+                    className="form-control card-bg-color text-white"
                     id="password"
                     name="password"
                     onChange={(ev) => updateInputValue(ev)}
@@ -70,10 +77,14 @@ const Login = () => {
                 />
                 {error && <div className="text-danger mt-2">{error}</div>}
             </div>
-            <button type="submit" className="btn btn-primary">
+            <button type="submit" className="btn manage-btn rounded-3">
                 Login
             </button>
         </form>
+        </div>
+        </div>
+        </div>
+    </>
     );
 
 }

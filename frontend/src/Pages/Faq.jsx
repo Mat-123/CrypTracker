@@ -1,6 +1,11 @@
 const Faq = () => {
 
     return (
+        <>
+    <div className="col-2">
+
+    </div>
+    <div className="col-8">
         <div className="card mt-5" >
             <ul className="list-group list-group-flush">
                 <li className="list-group-item">
@@ -24,6 +29,8 @@ const Faq = () => {
                 </li>
             </ul>
         </div>
+        </div>
+        </>
     )
 }
 

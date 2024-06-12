@@ -52,6 +52,13 @@ const Register = () => {
     };
 
     return (
+        <>
+    <div className="col-2">
+
+    </div>
+    <div className="col-8">
+        <div class="card card-bg-color rounded-4 text-white mt-5">
+            <div class="card-body">
         <form onSubmit={(ev) => submitLogin(ev)} noValidate>
             <div className="mb-3">
                 <label htmlFor="name" className="form-label">
@@ -59,7 +66,7 @@ const Register = () => {
                 </label>
                 <input
                     type="text"
-                    className="form-control"
+                    className="form-control card-bg-color text-white"
                     id="name"
                     name="name"
                     onChange={(ev) => updateInputValue(ev)}
@@ -72,7 +79,7 @@ const Register = () => {
                 </label>
                 <input
                     type="email"
-                    className="form-control"
+                    className="form-control card-bg-color text-white"
                     id="email"
                     name="email"
                     onChange={(ev) => updateInputValue(ev)}
@@ -85,7 +92,7 @@ const Register = () => {
                 </label>
                 <input
                     type="password"
-                    className="form-control"
+                    className="form-control card-bg-color text-white"
                     id="password"
                     name="password"
                     onChange={(ev) => updateInputValue(ev)}
@@ -98,17 +105,21 @@ const Register = () => {
                 </label>
                 <input
                     type="password"
-                    className="form-control"
+                    className="form-control card-bg-color text-white"
                     id="password_confirmation"
                     name="password_confirmation"
                     onChange={(ev) => updateInputValue(ev)}
                     value={formData.password_confirmation}
                 />
             </div>
-            <button type="submit" className="btn btn-primary">
+            <button type="submit" className="btn manage-btn rounded-3">
                 Register
             </button>
         </form>
+        </div>
+        </div>
+        </div>
+    </>
     );
 };
 

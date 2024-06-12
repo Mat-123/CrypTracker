@@ -37,6 +37,7 @@ class WalletController extends Controller
         $validatedData = $request->validate([
             'id_crypto' => 'required|integer',
             'name_crypto' =>  'nullable|string|max:255',
+            'symbol' => 'required|string|max:40',
         ]);
         $validatedData['user_id'] = $userId;
         $addWallet = Wallet::create($validatedData);

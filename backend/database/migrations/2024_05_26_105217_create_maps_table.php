@@ -15,6 +15,7 @@ return new class extends Migration
             $table->unsignedBigInteger('id_crypto')->primary();
             $table->string('name_crypto', 40);
             $table->string('slug_crypto', 40);
+            $table->string('symbol', 40);
             $table->decimal('last_value', total: 18, places: 8)->unsigned()->nullable();
             $table->boolean('fetch_price')->default(false);
             $table->timestamps();
