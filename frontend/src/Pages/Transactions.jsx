@@ -12,6 +12,8 @@ const Transactions = () => {
     user_id: null,
     id_crypto: null,
     last_value: null,
+    name: '', // Add name to state
+    symbol: '', // Add symbol to state
     transactions: []
   });
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -78,6 +80,8 @@ const Transactions = () => {
         user_id: res.data.user_id,
         id_crypto: res.data.id_crypto,
         last_value: res.data.last_value ? parseFloat(res.data.last_value).toString() : null,
+        name: res.data.name, // Set name
+        symbol: res.data.symbol, // Set symbol
         transactions: formattedTransactions
       });
     } catch (error) {
@@ -121,6 +125,10 @@ const Transactions = () => {
     };
   };
 
+  const formatCurrency = (value) => {
+    return parseFloat(value).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  };
+
   const {
     holdings,
     holdingsValue,
@@ -137,21 +145,22 @@ const Transactions = () => {
       </div>
       <div className="col-8">
         <div className="text-white mt-5">
-          <h2 className="my-3">Transactions for Crypto ID: {id_crypto}</h2>
+          <h2 className="my-3">Transactions for Crypto: {cryptoData.name} ({cryptoData.symbol})</h2>
           <div className="card card-bg-color text-white rounded-4">
             <div className="card-body container">
               <div className="row">
                 <div className="col-4 text-start">
-                  <p>Holdings: {holdings}</p>
-                  <p>Holdings Value: {holdingsValue.toFixed(2)} USD</p>
+                  <p className="display-value">Holdings:</p><p> {holdings} {cryptoData.symbol}</p>
+                  <p className="display-value">Holdings Value:</p><p> {formatCurrency(holdingsValue)} USD</p>
                 </div>
                 <div className="col-4 text-start">
-                  <p>Total Cost: {totalSpent.toFixed(2)} USD</p>
-                  <p>Average Net Cost: {averageNetCost !== null ? averageNetCost.toFixed(2) : 'N/A'} USD</p>
+                  <p className="display-value">Total Cost:</p><p> {formatCurrency(totalSpent)} USD</p>
+                  <p className="display-value">Average Net Cost:</p><p> {averageNetCost !== null ? formatCurrency(averageNetCost) : 'N/A'} USD</p>
                 </div>
                 <div className="col-4 text-start">
+                  <p className="display-value">PNL:</p>
                   <p className={pnl >= 0 ? 'text-success' : 'text-danger'}>
-                    PNL: {pnl.toFixed(2)} USD ({pnlPercentage !== null ? pnlPercentage.toFixed(2) : 'N/A'}%)
+                    {formatCurrency(pnl)} USD ({pnlPercentage !== null ? pnlPercentage.toFixed(2) : 'N/A'}%)
                   </p>
                 </div>
               </div>
@@ -173,7 +182,7 @@ const Transactions = () => {
                       <span>Quantity: {parseFloat(transaction.quantity).toString()}</span>
                     </div>
                     <div className="col d-flex align-items-center">
-                      <span>Transaction Price: {parseFloat(transaction.transaction_price).toString()} USD</span>
+                      <span>Transaction Price: {formatCurrency(transaction.transaction_price)} USD</span>
                     </div>
                     <div className="col d-flex justify-content-end align-items-center">
                       <button className="btn manage-btn rounded-3 me-3" onClick={() => openEditModal(transaction)}>Edit</button>
@@ -191,4 +200,3 @@ const Transactions = () => {
 };
 
 export default Transactions;
-

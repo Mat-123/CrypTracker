@@ -15,6 +15,7 @@ return new class extends Migration
             $table->string('slug_crypto', 40);
             $table->decimal('price', total: 20, places: 8)->unsigned()->nullable();
             $table->unsignedBigInteger('m_cap')->nullable();
+            $table->decimal('mcap_dom', total: 10, places: 3)->unsigned()->nullable();
             $table->date('date');
 
             // definizione degli index

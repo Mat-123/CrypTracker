@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\HistoryController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\MapController;
@@ -30,4 +31,8 @@ Route::name('api.')->prefix('v1')->middleware(['auth:sanctum'])->group(function 
     Route::delete('/nfttransaction/{nftTransaction}', [NftTransactionController::class, 'destroy'])->name('nfttransaction.destroy');
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
     Route::put('/profile', [ProfileController::class, 'updateCmcApiKey'])->name('profile.updateCmcApiKey');
+});
+
+Route::name('api.')->prefix('v1')->middleware(['premium'])->group(function () {
+    Route::get('/analysis/{timeframe}', [HistoryController::class, 'index'])->name('analysis.index');
 });

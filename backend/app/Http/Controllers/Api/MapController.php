@@ -18,8 +18,8 @@ class MapController extends Controller
     {
         $topCoins = DB::table('maps')
             ->orderBy('mcap', 'desc')
-            ->take(5)
-            ->get(['id_crypto', 'symbol', 'last_value', 'volume_24h', 'percent_change_24h', 'percent_change_7d']);
+            ->take(6)
+            ->get(['id_crypto', 'name_crypto', 'symbol', 'mcap', 'last_value', 'volume_24h', 'percent_change_24h', 'percent_change_7d']);
 
         return response()->json($topCoins);
     }

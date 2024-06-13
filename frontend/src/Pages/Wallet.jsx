@@ -75,8 +75,18 @@ const Wallet = () => {
     return totalValues;
   };
 
+  const calculateTotalSum = (totalValues) => {
+    const total = Object.values(totalValues).reduce((acc, value) => acc + parseFloat(value), 0);
+    return total.toFixed(2); // Round to 2 decimal places
+  };
+
+  const formatCurrency = (value) => {
+    return parseFloat(value).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  };
+
   const { cryptoQuantities, cryptoInfo, transactionCounts } = calculateCryptoQuantities(cryptos);
   const totalValues = calculateTotalValues(cryptos, cryptoQuantities);
+  const totalSum = calculateTotalSum(totalValues);
 
   const chartData = {
     labels: Object.values(cryptoInfo).map(info => info.name),
@@ -90,9 +100,12 @@ const Wallet = () => {
   };
 
   const chartOptions = {
+    responsive: true,
+    maintainAspectRatio: false,
+    aspectRatio: 1.5,
     plugins: {
       legend: {
-        position: 'bottom',
+        position: 'right',
         labels: {
           color: '#FFFFFF',
           font: {
@@ -101,48 +114,56 @@ const Wallet = () => {
         }
       }
     },
-    layout: {
-      padding: {
-        top: 20
-      }
-    }
   };
-
 
   return (
     <>
-    <h1 className="text-white mt-5">My Crypto Wallet</h1>
-    <div className="row mt-5">
-    <div className="col-2">
-
-    </div>
-    <div className="col-8">
-    <div className="text-white mt-3">
-        {Object.entries(cryptoQuantities).map(([id_crypto, quantity]) => (
-          <div className="card card-bg-color text-white mb-3 rounded-4" key={id_crypto}>
-            <div className="card-body d-flex justify-content-between align-items-center">
-              <div>
-            {cryptoInfo[id_crypto].name}: {quantity} {cryptoInfo[id_crypto].symbol} - Total Value: {totalValues[id_crypto]} USD - Total Transactions: {transactionCounts[id_crypto]}
-            </div>
-            <div>
-            <Link to={`/transactions/${id_crypto}`}>
-              <button className="btn manage-btn rounded-3">Manage</button>
-            </Link>
-            </div>
+      <div className="row mt-5">
+        <div className="col-8 mx-auto">
+          <div className="card card-bg-color text-white rounded-4">
+            <h2 className="text-white py-2">My Crypto Wallet</h2>
           </div>
-          </div>
-        ))}
-    </div>
-    </div>
-    <div className="col-2">
-      <div className="card card-bg-color text-white my-3 rounded-4">
-      <div className="my-3" onClick={() => setShowModal(true)} style={{ cursor: 'pointer' }}>
-          <Doughnut data={chartData} options={chartOptions} />
         </div>
-    </div>
-    </div>
-    </div>
-    <ChartModal show={showModal} onClose={() => setShowModal(false)} chartData={chartData} options={chartOptions} />
+      </div>
+      <div className="row mt-5">
+        <div className="col-8 mx-auto">
+          <div className="card card-bg-color text-white rounded-4">
+            <div className="row">
+              <div className="col-6">
+                <div className="chart-container my-3 mx-3" onClick={() => setShowModal(true)}>
+                  <Doughnut data={chartData} options={chartOptions} />
+                </div>
+              </div>
+              <div className="col-6 text-start">
+                <h4 className="mt-4">My Portfolio</h4>
+                <h3>{formatCurrency(totalSum)} USD</h3>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="row mt-5">
+        <div className="col-2"></div>
+        <div className="col-8">
+          <div className="text-white mt-3">
+            {Object.entries(cryptoQuantities).map(([id_crypto, quantity]) => (
+              <div className="card card-bg-color text-white mb-3 rounded-4" key={id_crypto}>
+                <div className="card-body d-flex justify-content-between align-items-center">
+                  <div>
+                    {cryptoInfo[id_crypto].name}: {quantity} {cryptoInfo[id_crypto].symbol} - Total Value: {formatCurrency(totalValues[id_crypto])} USD - Total Transactions: {transactionCounts[id_crypto]}
+                  </div>
+                  <div>
+                    <Link to={`/transactions/${id_crypto}`}>
+                      <button className="btn manage-btn rounded-3">Manage</button>
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+      <ChartModal show={showModal} onClose={() => setShowModal(false)} chartData={chartData} options={chartOptions} />
     </>
   );
 }

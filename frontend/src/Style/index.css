@@ -59,3 +59,15 @@ input[type="text"][disabled] {
     background-color: #808080;
     opacity: 1; /* Firefox */
 }
+
+.chart-container {
+    max-height: 300px;
+    max-width: 100%;
+    margin: auto;
+    position: relative;
+    cursor: pointer;
+}
+
+.display-value {
+    margin-bottom: 0.25rem;
+}

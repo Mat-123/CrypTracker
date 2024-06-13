@@ -21,6 +21,9 @@ import Transactions from './Pages/Transactions';
 import UserSettings from './Pages/UserSettings';
 import Faq from './Pages/Faq';
 import "../src/Style/index.css"
+import HistoricalAnalysis from './Pages/HistoricalAnalysis';
+import PremiumRoutes from './Pages/PremiumRoutes';
+import BuyPremium from './Pages/BuyPremium';
 // import SolSearchResults from './Components/SolSearchResults';
 // import EthSearchResults from './Components/EthSearchResults';
 
@@ -64,6 +67,11 @@ function App() {
                     <Route path="/transactions/:id_crypto" element={<Transactions />} />
                     <Route path='/profile' element={<UserSettings />} />
                     <Route path='/faq' element={<Faq />} />
+                    <Route path='/buypremium' element={<BuyPremium />} />
+                  </Route>
+
+                  <Route element={<PremiumRoutes />}>
+                  <Route path='/analysis' element={<HistoricalAnalysis />} />
                   </Route>
 
                   <Route element={<GuestRoutes />}>

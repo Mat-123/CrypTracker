@@ -76,7 +76,7 @@ const UserSettings = () => {
                     <label htmlFor='cmcApiKey' className='form-label'>CMC API KEY:</label>
                     <input className='form-control card-bg-color text-white' id='cmcApiKey' name='cmc_api_key' type='text' value={formData.cmc_api_key} onChange={handleChange}></input>
                 </div>
-                <button type="button" className="btn btn-success" onClick={saveChanges}>Save changes</button>
+                <button type="button" className="btn manage-btn" onClick={saveChanges}>Save changes</button>
             </div>
         </div>
         </div>
