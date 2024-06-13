@@ -16,7 +16,11 @@ return new class extends Migration
             $table->string('name_crypto', 40);
             $table->string('slug_crypto', 40);
             $table->string('symbol', 40);
-            $table->decimal('last_value', total: 18, places: 8)->unsigned()->nullable();
+            $table->decimal('last_value', total: 20, places: 8)->unsigned()->nullable();
+            $table->decimal('mcap', total: 25, places: 2)->unsigned()->nullable();
+            $table->decimal('volume_24h', total: 25, places: 2)->unsigned()->nullable();
+            $table->decimal('percent_change_24h', total: 14, places: 6)->nullable();
+            $table->decimal('percent_change_7d', total: 14, places: 6)->nullable();
             $table->boolean('fetch_price')->default(false);
             $table->timestamps();
 

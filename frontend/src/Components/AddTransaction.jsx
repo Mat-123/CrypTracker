@@ -95,7 +95,7 @@ const AddTransaction = ({ isOpen, onClose, id_crypto, onCreateTransaction }) => 
     return (
         <div className={`modal fade ${isOpen ? 'show d-block' : ''}`} tabIndex="-1" role="dialog">
             <div className="modal-dialog" role="document">
-                <div className="modal-content">
+                <div className="modal-content card-bg-color">
                     <div className="modal-header">
                         <h5 className="modal-title">Create Transaction</h5>
                         <button type="button" className="btn-close" onClick={handleClose}></button>
@@ -126,25 +126,25 @@ const AddTransaction = ({ isOpen, onClose, id_crypto, onCreateTransaction }) => 
                             </div>
                             <div className="mb-3">
                                 <label className="form-label">Quantity</label>
-                                <input type="number" name="quantity" className="form-control" value={formData.quantity} onChange={handleChange} required />
+                                <input type="number" name="quantity" className="form-control card-bg-color text-white" value={formData.quantity} onChange={handleChange} required />
                             </div>
                             <div className="mb-3">
                                 <label className="form-label">Transaction Price</label>
-                                <input type="number" name="transaction_price" className="form-control" value={formData.transaction_price} onChange={handleChange} required />
+                                <input type="number" name="transaction_price" className="form-control card-bg-color text-white" value={formData.transaction_price} onChange={handleChange} required />
                             </div>
                             <div className="mb-3">
                                 <label className="form-label">Total Spent</label>
-                                <input type="number" name="total_spent" className="form-control" value={formData.total_spent} onChange={handleChange} required />
+                                <input type="number" name="total_spent" className="form-control card-bg-color text-white" value={formData.total_spent} onChange={handleChange} required />
                             </div>
                             <div className="mb-3">
                                 <label className="form-label">Transaction Date</label>
-                                <input type="date" name="transaction_date" className="form-control" value={formData.transaction_date} onChange={handleChange} required />
+                                <input type="date" name="transaction_date" className="form-control card-bg-color text-white" value={formData.transaction_date} onChange={handleChange} required />
                             </div>
                             <div className="mb-3">
                                 <label className="form-label">Wallet</label>
-                                <input type="text" name="wallet" className="form-control" value={formData.wallet} onChange={handleChange} />
+                                <input type="text" name="wallet" className="form-control card-bg-color text-white" value={formData.wallet} onChange={handleChange} />
                             </div>
-                            <button type="button" className="btn btn-primary" onClick={handleCreateTransaction}>Create Transaction</button>
+                            <button type="button" className="btn manage-btn" onClick={handleCreateTransaction}>Create Transaction</button>
                         </form>
                     </div>
                     <div className="modal-footer">

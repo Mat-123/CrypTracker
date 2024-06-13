@@ -104,9 +104,36 @@ class TransactionController extends Controller
             ->join('maps', 'transactions.id_crypto', '=', 'maps.id_crypto')
             ->where('transactions.user_id', $userId)
             ->where('transactions.id_crypto', $cryptoId)
-            ->select('transactions.*', 'maps.last_value')
+            ->select('transactions.*', 'maps.last_value', 'maps.symbol', 'maps.name_crypto')
             ->get();
 
-        return $transactions;
+        if ($transactions->isEmpty()) {
+            return response()->json(['message' => 'No transactions found'], 404);
+        }
+
+        // Get the first transaction to extract common data
+        $firstTransaction = $transactions->first();
+
+        // Format the response
+        $formattedResponse = [
+            'id' => $firstTransaction->id,
+            'user_id' => $firstTransaction->user_id,
+            'id_crypto' => $firstTransaction->id_crypto,
+            'last_value' => $firstTransaction->last_value,
+            'name' => $firstTransaction->name_crypto,
+            'symbol' => $firstTransaction->symbol,
+            'transactions' => $transactions->map(function ($transaction) {
+                return [
+                    'quantity' => $transaction->quantity,
+                    'transaction_price' => $transaction->transaction_price,
+                    'total_spent' => $transaction->total_spent,
+                    'transaction_date' => $transaction->transaction_date,
+                    'transaction_type' => $transaction->transaction_type,
+                    'wallet' => $transaction->wallet,
+                ];
+            }),
+        ];
+
+        return response()->json($formattedResponse);
     }
 }

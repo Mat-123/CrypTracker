@@ -13,7 +13,7 @@ return new class extends Migration
             $table->unsignedBigInteger('id_crypto');
             $table->string('name_crypto', 40);
             $table->string('slug_crypto', 40);
-            $table->decimal('price', total: 18, places: 8)->unsigned()->nullable();
+            $table->decimal('price', total: 20, places: 8)->unsigned()->nullable();
             $table->unsignedBigInteger('m_cap')->nullable();
             $table->date('date');
 

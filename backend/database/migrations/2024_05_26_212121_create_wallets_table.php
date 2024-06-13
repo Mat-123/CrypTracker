@@ -17,7 +17,7 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->string('name_crypto', 40);
             $table->string('symbol', 40);
-            $table->decimal('last_value', total: 18, places: 8)->unsigned()->nullable;
+            $table->decimal('last_value', total: 20, places: 8)->unsigned()->nullable;
 
             // definizione degli index
             $table->index(['user_id']);

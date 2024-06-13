@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Models\Map;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreMapRequest;
 use App\Http\Requests\UpdateMapRequest;
@@ -15,7 +16,12 @@ class MapController extends Controller
      */
     public function index()
     {
-        //
+        $topCoins = DB::table('maps')
+            ->orderBy('mcap', 'desc')
+            ->take(5)
+            ->get(['id_crypto', 'symbol', 'last_value', 'volume_24h', 'percent_change_24h', 'percent_change_7d']);
+
+        return response()->json($topCoins);
     }
 
     /**

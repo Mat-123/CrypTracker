@@ -7,7 +7,13 @@ import EditTransaction from "../Components/EditTransaction";
 const Transactions = () => {
   const { id_crypto } = useParams();
   const navigate = useNavigate();
-  const [transactions, setTransactions] = useState([]);
+  const [cryptoData, setCryptoData] = useState({
+    id: null,
+    user_id: null,
+    id_crypto: null,
+    last_value: null,
+    transactions: []
+  });
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [selectedTransaction, setSelectedTransaction] = useState(null);
@@ -30,13 +36,16 @@ const Transactions = () => {
     setIsEditModalOpen(false);
   };
 
-  const handleDeleteTransaction = async (transactionId) => {
+  const handleDeleteTransaction = async (transactionIndex) => {
     const confirmDelete = window.confirm("Are you sure you want to delete this transaction? This action cannot be undone.");
     if (!confirmDelete) return;
 
     try {
+      const transactionId = cryptoData.transactions[transactionIndex].id; // Assuming the transactions have an id
       await axios.delete(`/api/v1/transaction/${transactionId}`);
-      setTransactions(transactions.filter((t) => t.id !== transactionId));
+      const updatedTransactions = [...cryptoData.transactions];
+      updatedTransactions.splice(transactionIndex, 1);
+      setCryptoData({ ...cryptoData, transactions: updatedTransactions });
       console.log("Transaction deleted successfully");
     } catch (error) {
       console.error("Error deleting transaction:", error);
@@ -59,12 +68,18 @@ const Transactions = () => {
   const fetchTransactions = async () => {
     try {
       const res = await axios.get(`/api/v1/transaction/${id_crypto}`);
-      const formattedTransactions = res.data.map(transaction => ({
+      const formattedTransactions = res.data.transactions.map(transaction => ({
         ...transaction,
         quantity: parseFloat(transaction.quantity).toString(),
         transaction_price: parseFloat(transaction.transaction_price).toString(),
       }));
-      setTransactions(formattedTransactions);
+      setCryptoData({
+        id: res.data.id,
+        user_id: res.data.user_id,
+        id_crypto: res.data.id_crypto,
+        last_value: res.data.last_value ? parseFloat(res.data.last_value).toString() : null,
+        transactions: formattedTransactions
+      });
     } catch (error) {
       console.error("Error fetching transactions:", error);
     }
@@ -79,21 +94,21 @@ const Transactions = () => {
     let totalSellQuantity = 0;
     let totalSpent = 0;
 
-    transactions.forEach(transaction => {
+    cryptoData.transactions.forEach(transaction => {
       if (transaction.transaction_type === 0) { // BUY
-        totalBuyQuantity += transaction.quantity;
-        totalSpent += transaction.quantity * transaction.transaction_price;
+        totalBuyQuantity += parseFloat(transaction.quantity);
+        totalSpent += parseFloat(transaction.quantity) * parseFloat(transaction.transaction_price);
       } else { // SELL
-        totalSellQuantity += transaction.quantity;
+        totalSellQuantity += parseFloat(transaction.quantity);
       }
     });
 
     const holdings = totalBuyQuantity - totalSellQuantity;
-    const lastValue = transactions[0]?.last_value || 0;
+    const lastValue = cryptoData.last_value ? parseFloat(cryptoData.last_value) : 0;
     const holdingsValue = holdings * lastValue;
-    const averageNetCost = totalSpent / (totalBuyQuantity || 1);
-    const pnl = holdingsValue - averageNetCost;
-    const pnlPercentage = (pnl / averageNetCost) * 100;
+    const averageNetCost = totalBuyQuantity > 0 ? totalSpent / totalBuyQuantity : null;
+    const pnl = holdingsValue - totalSpent;
+    const pnlPercentage = totalSpent > 0 ? (pnl / totalSpent) * 100 : null;
 
     return {
       holdings,
@@ -102,6 +117,7 @@ const Transactions = () => {
       averageNetCost,
       pnl,
       pnlPercentage,
+      totalBuyQuantity // Add this line to return totalBuyQuantity
     };
   };
 
@@ -112,67 +128,67 @@ const Transactions = () => {
     averageNetCost,
     pnl,
     pnlPercentage,
+    totalBuyQuantity
   } = calculateMetrics();
 
   return (
     <>
-    <div className="col-2">
-
-    </div>
-    <div className="col-8">
-    <div className="text-white mt-5">
-      <h2 className="my-3">Transactions for Crypto ID: {id_crypto}</h2>
-      <div className="card card-bg-color text-white rounded-4">
-        <div className="card-body container">
-          <div className="row">
-          <div className="col-4 text-start">
-              <p>Holdings: {holdings}</p>
-              <p>Holdings Value: {holdingsValue.toFixed(2)} USD</p>
+      <div className="col-2">
+      </div>
+      <div className="col-8">
+        <div className="text-white mt-5">
+          <h2 className="my-3">Transactions for Crypto ID: {id_crypto}</h2>
+          <div className="card card-bg-color text-white rounded-4">
+            <div className="card-body container">
+              <div className="row">
+                <div className="col-4 text-start">
+                  <p>Holdings: {holdings}</p>
+                  <p>Holdings Value: {holdingsValue.toFixed(2)} USD</p>
+                </div>
+                <div className="col-4 text-start">
+                  <p>Total Cost: {totalSpent.toFixed(2)} USD</p>
+                  <p>Average Net Cost: {averageNetCost !== null ? averageNetCost.toFixed(2) : 'N/A'} USD</p>
+                </div>
+                <div className="col-4 text-start">
+                  <p className={pnl >= 0 ? 'text-success' : 'text-danger'}>
+                    PNL: {pnl.toFixed(2)} USD ({pnlPercentage !== null ? pnlPercentage.toFixed(2) : 'N/A'}%)
+                  </p>
+                </div>
+              </div>
             </div>
-            <div className="col-4 text-start">
-              <p>Total Cost: {totalSpent.toFixed(2)} USD</p>
-              <p>Average Net Cost: {averageNetCost.toFixed(2)} USD</p>
-            </div>
-            <div className="col-4 text-start">
-              <p className={pnl >= 0 ? 'text-success' : 'text-danger'}>
-                PNL: {pnl.toFixed(2)} USD ({pnlPercentage.toFixed(2)}%)
-              </p>
-            </div>
+          </div>
+          <button className="btn btn-success rounded-3 me-3 my-3" onClick={openModal}>Create Transaction</button>
+          <AddTransaction isOpen={isModalOpen} onClose={closeModal} id_crypto={id_crypto} onCreateTransaction={fetchTransactions} />
+          <EditTransaction isOpen={isEditModalOpen} onClose={closeEditModal} transaction={selectedTransaction} />
+          <button className="btn btn-danger rounded-3 ms-3" onClick={handleDeleteCrypto}>Remove Crypto</button>
+          <div className="card card-bg-color text-white my-3 rounded-4">
+            <ul className="list-group list-group-flush rounded-4">
+              {cryptoData.transactions.map((transaction, index) => (
+                <li className="list-group-item card-bg-color text-white d-flex justify-content-between align-items-center" key={index}>
+                  <div className="row w-100">
+                    <div className="col d-flex align-items-center">
+                      <span className={`badge ${transaction.transaction_type === 0 ? 'bg-success' : 'bg-danger'} me-2 flex-shrink-0`}>
+                        {transaction.transaction_type === 0 ? 'BUY' : 'SELL'}
+                      </span>
+                      <span>Quantity: {parseFloat(transaction.quantity).toString()}</span>
+                    </div>
+                    <div className="col d-flex align-items-center">
+                      <span>Transaction Price: {parseFloat(transaction.transaction_price).toString()} USD</span>
+                    </div>
+                    <div className="col d-flex justify-content-end align-items-center">
+                      <button className="btn manage-btn rounded-3 me-3" onClick={() => openEditModal(transaction)}>Edit</button>
+                      <button className="btn btn-danger rounded-3" onClick={() => handleDeleteTransaction(index)}>Delete</button>
+                    </div>
+                  </div>
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
       </div>
-      <button className="btn btn-success rounded-3 me-3 my-3" onClick={openModal}>Create Transaction</button>
-      <AddTransaction isOpen={isModalOpen} onClose={closeModal} id_crypto={id_crypto} onCreateTransaction={fetchTransactions} />
-      <EditTransaction isOpen={isEditModalOpen} onClose={closeEditModal} transaction={selectedTransaction} />
-      <button className="btn btn-danger rounded-3 ms-3" onClick={handleDeleteCrypto}>Remove Crypto</button>
-
-      <div className="card card-bg-color text-white my-3 rounded-4">
-      <ul className="list-group list-group-flush rounded-4">
-        {transactions.map((transaction) => (
-          <li className="list-group-item card-bg-color text-white d-flex justify-content-between align-items-center" key={transaction.id}>
-          <div className="row w-100">
-            <div className="col d-flex align-items-center">
-              <span className={`badge ${transaction.transaction_type === 0 ? 'bg-success' : 'bg-danger'} me-2 flex-shrink-0`}>
-                {transaction.transaction_type === 0 ? 'BUY' : 'SELL'}
-              </span>
-              <span>Quantity: {parseFloat(transaction.quantity).toString()}</span>
-            </div>
-            <div className="col d-flex align-items-center">
-              <span>Transaction Price: {parseFloat(transaction.transaction_price).toString()} USD</span>
-            </div>
-            <div className="col d-flex justify-content-end align-items-center">
-              <button className="btn manage-btn rounded-3 me-3" onClick={() => openEditModal(transaction)}>Edit</button>
-              <button className="btn btn-danger rounded-3" onClick={() => handleDeleteTransaction(transaction.id)}>Delete</button>
-            </div>
-          </div>
-        </li>
-        ))}
-        </ul>
-      </div>
-    </div>
-    </div>
     </>
   );
 };
 
 export default Transactions;
+
