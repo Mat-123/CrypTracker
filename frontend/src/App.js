@@ -52,7 +52,7 @@ function App() {
         <BrowserRouter>
         <Navbar />
         <div className="App">
-          <div className="container">
+          <div className="container-fluid">
             <div className="row">
                 <Routes>
                   <Route path="/" element={<Home />} />

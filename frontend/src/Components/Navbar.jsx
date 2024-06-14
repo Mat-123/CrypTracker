@@ -64,6 +64,10 @@ const Navbar = () => {
                     <li className="nav-item">
                         <Link className="nav-link" aria-current="page" to="/wallet">Wallet</Link>
                     </li>
+                    { (user.role === 'premium') ? (
+                    <li className="nav-item">
+                        <Link className="nav-link" aria-current="page" to="/analysis">Analysis</Link>
+                    </li>) : '' }
                     </ul>
 
                     {user ? (

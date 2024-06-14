@@ -12,8 +12,8 @@ const Transactions = () => {
     user_id: null,
     id_crypto: null,
     last_value: null,
-    name: '', // Add name to state
-    symbol: '', // Add symbol to state
+    name: '',
+    symbol: '',
     transactions: []
   });
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -43,7 +43,7 @@ const Transactions = () => {
     if (!confirmDelete) return;
 
     try {
-      const transactionId = cryptoData.transactions[transactionIndex].id; // Assuming the transactions have an id
+      const transactionId = cryptoData.transactions[transactionIndex].id;
       await axios.delete(`/api/v1/transaction/${transactionId}`);
       const updatedTransactions = [...cryptoData.transactions];
       updatedTransactions.splice(transactionIndex, 1);
@@ -80,8 +80,8 @@ const Transactions = () => {
         user_id: res.data.user_id,
         id_crypto: res.data.id_crypto,
         last_value: res.data.last_value ? parseFloat(res.data.last_value).toString() : null,
-        name: res.data.name, // Set name
-        symbol: res.data.symbol, // Set symbol
+        name: res.data.name,
+        symbol: res.data.symbol,
         transactions: formattedTransactions
       });
     } catch (error) {
@@ -97,6 +97,7 @@ const Transactions = () => {
     let totalBuyQuantity = 0;
     let totalSellQuantity = 0;
     let totalSpent = 0;
+    let realizedPnl = 0;
 
     cryptoData.transactions.forEach(transaction => {
       if (transaction.transaction_type === 0) { // BUY
@@ -104,24 +105,25 @@ const Transactions = () => {
         totalSpent += parseFloat(transaction.quantity) * parseFloat(transaction.transaction_price);
       } else { // SELL
         totalSellQuantity += parseFloat(transaction.quantity);
+        realizedPnl += parseFloat(transaction.quantity) * parseFloat(transaction.transaction_price);
       }
     });
 
     const holdings = totalBuyQuantity - totalSellQuantity;
     const lastValue = cryptoData.last_value ? parseFloat(cryptoData.last_value) : 0;
     const holdingsValue = holdings * lastValue;
+    const unrealizedPnl = holdingsValue - totalSpent;
+    const totalPnl = realizedPnl + unrealizedPnl;
     const averageNetCost = totalBuyQuantity > 0 ? totalSpent / totalBuyQuantity : null;
-    const pnl = holdingsValue - totalSpent;
-    const pnlPercentage = totalSpent > 0 ? (pnl / totalSpent) * 100 : null;
 
     return {
       holdings,
       holdingsValue,
       totalSpent,
       averageNetCost,
-      pnl,
-      pnlPercentage,
-      totalBuyQuantity // Add this line to return totalBuyQuantity
+      totalPnl,
+      realizedPnl,
+      unrealizedPnl,
     };
   };
 
@@ -134,9 +136,9 @@ const Transactions = () => {
     holdingsValue,
     totalSpent,
     averageNetCost,
-    pnl,
-    pnlPercentage,
-    totalBuyQuantity
+    totalPnl,
+    realizedPnl,
+    unrealizedPnl,
   } = calculateMetrics();
 
   return (
@@ -158,9 +160,17 @@ const Transactions = () => {
                   <p className="display-value">Average Net Cost:</p><p> {averageNetCost !== null ? formatCurrency(averageNetCost) : 'N/A'} USD</p>
                 </div>
                 <div className="col-4 text-start">
-                  <p className="display-value">PNL:</p>
-                  <p className={pnl >= 0 ? 'text-success' : 'text-danger'}>
-                    {formatCurrency(pnl)} USD ({pnlPercentage !== null ? pnlPercentage.toFixed(2) : 'N/A'}%)
+                  <p className="display-value">Total PNL:</p>
+                  <p className={totalPnl >= 0 ? 'text-success' : 'text-danger'}>
+                    {formatCurrency(totalPnl)} USD
+                  </p>
+                  <p className="display-value">Realized PNL:</p>
+                  <p className={realizedPnl >= 0 ? 'text-success' : 'text-danger'}>
+                    {formatCurrency(realizedPnl)} USD
+                  </p>
+                  <p className="display-value">Unrealized PNL:</p>
+                  <p className={unrealizedPnl >= 0 ? 'text-success' : 'text-danger'}>
+                    {formatCurrency(unrealizedPnl)} USD
                   </p>
                 </div>
               </div>
@@ -200,3 +210,4 @@ const Transactions = () => {
 };
 
 export default Transactions;
+
