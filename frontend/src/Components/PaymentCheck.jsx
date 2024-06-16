@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { ethers } from 'ethers';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import PaymentProcessorABI from '../contracts/PaymentProcessorABI.json';
+import PaymentProcessorABI from '../abi/PaymentProcessorABI.json';
 
 const PaymentCheck = ({ selectedNetwork, selectedToken, provider, signer }) => {
   const [awaitingConfirmation, setAwaitingConfirmation] = useState(false);
