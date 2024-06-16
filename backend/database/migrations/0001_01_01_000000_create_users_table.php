@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('cmc_api_key', 50);
             $table->string('role', 30)->default('basic');
             $table->date('premium_expiry')->nullable();
+            $table->string('tx_hash', 100)->nullable();
             $table->timestamps();
         });
 

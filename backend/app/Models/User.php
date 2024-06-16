@@ -25,6 +25,7 @@ class User extends Authenticatable
         'email',
         'password',
         'cmc_api_key',
+        'tx_hash'
     ];
 
     /**
@@ -35,6 +36,7 @@ class User extends Authenticatable
     protected $hidden = [
         'password',
         'remember_token',
+        'tx_hash',
     ];
 
     /**

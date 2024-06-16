@@ -31,6 +31,7 @@ Route::name('api.')->prefix('v1')->middleware(['auth:sanctum'])->group(function 
     Route::delete('/nfttransaction/{nftTransaction}', [NftTransactionController::class, 'destroy'])->name('nfttransaction.destroy');
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
     Route::put('/profile', [ProfileController::class, 'updateCmcApiKey'])->name('profile.updateCmcApiKey');
+    Route::put('/update-user-role', [ProfileController::class, 'updatePremiumSubscription'])->name('update-user-role.updatePremiumSubscription');
 });
 
 Route::name('api.')->prefix('v1')->middleware(['premium'])->group(function () {
