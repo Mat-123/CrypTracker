@@ -2,6 +2,7 @@ import axios from 'axios';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { LOGIN } from '../redux/actions';
+import { Link } from 'react-router-dom';
 
 const Login = () => {
     const dispatch = useDispatch();
@@ -44,8 +45,8 @@ const Login = () => {
     return (
         <>
     <div className="col-8">
-        <div class="card card-bg-color rounded-4 text-white mt-5">
-            <div class="card-body">
+        <div className="card card-bg-color rounded-4 text-white mt-5">
+            <div className="card-body">
         <form onSubmit={(ev) => submitLogin(ev)} noValidate>
             <div className="mb-3">
                 <label htmlFor="email" className="form-label">
@@ -77,6 +78,11 @@ const Login = () => {
             <button type="submit" className="btn manage-btn rounded-3">
                 Login
             </button>
+            <div className='mt-3'>
+                <Link className='link-light' to="/forgot-password">
+                Forgot Passoword?
+                </Link>
+            </div>
         </form>
         </div>
         </div>

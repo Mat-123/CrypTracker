@@ -34,31 +34,38 @@ function Results() {
 
     return (
         <>
-        <div className='mt-5'>
-            <h1>Risultati della Ricerca</h1>
-            <div className="results">
+        <div className='row card card-bg-color text-white rounded-4 mt-5'>
+            <h2 className='py-2'>Search Results:</h2>
+            </div>
+            <div className="row mt-5">
                 {results.length > 0 ? (
-                    <ul className="list-group">
+                    <>
                         {results.map((result) => (
-                            <li key={result.id_crypto} className={`list-group-item ${isCryptoInWallet(result) ? 'list-group-item-secondary' : ''}`}>
+                            <div key={result.id_crypto} className="card card-bg-color text-white mb-3 rounded-4">
+                                <div className="card-body d-flex justify-content-between align-items-center">
+                                <div>
                             <strong>{result.name_crypto}</strong> ({result.slug_crypto}) - 
-                            {result.last_value !== null ? ` Valore: ${result.last_value}` : ' Valore non disponibile'} - 
-                            Prezzo Fetch: {result.fetch_price}
+                            {result.last_value !== null ? ` Valore: ${result.last_value}` : ' Valore non disponibile'}
+                            </div>
+                            
+                            <div>
                             {isCryptoInWallet(result) ? (
                                 <Link to={`/transactions/${result.id_crypto}`}>
-                                        <button className="btn btn-secondary btn-sm ms-2">Manage</button>
+                                        <button className="btn manage-btn">Manage</button>
                                     </Link>                            ) : (
-                                <button className="btn btn-primary btn-sm ms-2" onClick={() => handleAddToWallet(result)}>Aggiungi al wallet</button>
+                                <button className="btn manage-btn" onClick={() => handleAddToWallet(result)}>Add to Wallet</button>
                             )}
-                        </li>
+                            </div>
+                            </div>
+                        </div>
                         ))}
-                    </ul>
+                        </>
                 ) : (
-                    <p>Nessun risultato trovato.</p>
+                    <p>No results found.</p>
                 )}
             </div>
-            <Link to="/crypto" className="btn btn-secondary mt-4">Torna alla ricerca</Link>
-        </div>
+            <Link to="/crypto" className="btn manage-btn mt-4">Back to Search</Link>
+
         </>
     );
 }

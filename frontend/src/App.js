@@ -25,6 +25,8 @@ import HistoricalAnalysis from './Pages/HistoricalAnalysis';
 import PremiumRoutes from './Pages/PremiumRoutes';
 import BuyPremium from './Pages/BuyPremium';
 import Sidebar from './Components/Sidebar';
+import ForgotPassword from './Pages/ForgotPassword';
+import ResetPassword from './Pages/ResetPassword';
 // import SolSearchResults from './Components/SolSearchResults';
 // import EthSearchResults from './Components/EthSearchResults';
 
@@ -82,6 +84,8 @@ function App() {
                   <Route element={<GuestRoutes />}>
                     <Route path="/login" element={<Login />} />
                     <Route path="/register" element={<Register />} />
+                    <Route path="/forgot-password" element={<ForgotPassword />} />
+                    <Route path="/reset-password/:token" element={<ResetPassword />} />
                   </Route>
                   
                   <Route path="/404" element={<Error404 />} />
