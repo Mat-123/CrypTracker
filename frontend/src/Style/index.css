@@ -71,3 +71,32 @@ input[type="text"][disabled] {
 .display-value {
     margin-bottom: 0.25rem;
 }
+
+hr {
+    border-color: #F0BB6C;
+}
+
+.form-select,
+.form-select:focus,
+.form-select:hover {
+    background-color: #31363F;
+    border-color: #F0BB6C;
+    box-shadow: none;
+    outline: none;
+    color: white;
+}
+
+.dropdown-menu {
+    --bs-dropdown-bg: #{mix($blue-500, $blue-600)};
+    --bs-dropdown-link-active-bg: #{$blue-700};
+}
+
+.chart-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: auto;
+    max-height: 600px;
+    position: relative;
+}  

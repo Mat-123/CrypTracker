@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ethers } from 'ethers';
+import { BrowserProvider, Contract, parseUnits } from 'ethers';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import PaymentProcessorABI from '../abi/PaymentProcessorABI.json';
@@ -17,8 +17,8 @@ const PaymentCheck = ({ selectedNetwork, selectedToken, provider, signer }) => {
     try {
       setAwaitingConfirmation(true);
 
-      const contract = new ethers.Contract(contractAddress, PaymentProcessorABI, signer);
-      const amount = ethers.utils.parseUnits('5', 6); // 5 USDT/USDC with 6 decimals
+      const contract = new Contract(contractAddress, PaymentProcessorABI, signer);
+      const amount = parseUnits('5', 6); // 5 USDT/USDC with 6 decimals
       const tx = await contract.receivePayment(selectedNetwork, selectedToken, 'txHashPlaceholder', {
         value: amount,
       });
@@ -44,29 +44,27 @@ const PaymentCheck = ({ selectedNetwork, selectedToken, provider, signer }) => {
 
   return (
     <>
-    <div className="col-2"></div>
-    <div className="col-8">
-      <div className="card mt-5 card-bg-color text-white">
-        <div className="card-header">
-          <h2>Buy Premium</h2>
-          {awaitingConfirmation && (
-            <p>
-              <i className="fa fa-spinner fa-spin"></i> Awaiting payment confirmation...
-            </p>
-          )}
-          {registeringPayment && (
-            <p>
-              <i className="fa fa-spinner fa-spin"></i> Registering payment on our database...
-            </p>
-          )}
-          {!awaitingConfirmation && !registeringPayment && (
-            <button onClick={handleTransaction}>Send Transaction</button>
-          )}
+        <div className="card mt-5 card-bg-color text-white">
+          <div className="card-header">
+            <h2>Buy Premium</h2>
+            {awaitingConfirmation && (
+              <p>
+                <i className="fa fa-spinner fa-spin"></i> Awaiting payment confirmation...
+              </p>
+            )}
+            {registeringPayment && (
+              <p>
+                <i className="fa fa-spinner fa-spin"></i> Registering payment on our database...
+              </p>
+            )}
+            {!awaitingConfirmation && !registeringPayment && (
+              <button onClick={handleTransaction}>Send Transaction</button>
+            )}
+          </div>
         </div>
-      </div>
-    </div>
     </>
   );
 };
 
 export default PaymentCheck;
+

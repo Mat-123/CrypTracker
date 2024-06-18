@@ -119,32 +119,26 @@ const Wallet = () => {
   return (
     <>
       <div className="row mt-5">
-        <div className="col-8 mx-auto">
           <div className="card card-bg-color text-white rounded-4">
             <h2 className="text-white py-2">My Crypto Wallet</h2>
           </div>
-        </div>
       </div>
       <div className="row mt-5">
-        <div className="col-8 mx-auto">
           <div className="card card-bg-color text-white rounded-4">
             <div className="row">
-              <div className="col-6">
+              <div className="col-5">
                 <div className="chart-container my-3 mx-3" onClick={() => setShowModal(true)}>
                   <Doughnut data={chartData} options={chartOptions} />
                 </div>
               </div>
-              <div className="col-6 text-start">
+              <div className="col-7 text-start">
                 <h4 className="mt-4">My Portfolio</h4>
                 <h3>{formatCurrency(totalSum)} USD</h3>
               </div>
             </div>
-          </div>
         </div>
       </div>
       <div className="row mt-5">
-        <div className="col-2"></div>
-        <div className="col-8">
           <div className="text-white mt-3">
             {Object.entries(cryptoQuantities).map(([id_crypto, quantity]) => (
               <div className="card card-bg-color text-white mb-3 rounded-4" key={id_crypto}>
@@ -162,7 +156,6 @@ const Wallet = () => {
             ))}
           </div>
         </div>
-      </div>
       <ChartModal show={showModal} onClose={() => setShowModal(false)} chartData={chartData} options={chartOptions} />
     </>
   );

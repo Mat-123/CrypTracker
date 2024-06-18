@@ -23,36 +23,39 @@ const NetworkTokenSelection = () => {
   };
 
   return (
-    <>
-    <div className="col-2"></div>
     <div className="col-8">
-      <div className="card mt-5 card-bg-color text-white">
-        <label>Select Network:</label>
-        <select onChange={(e) => setSelectedNetwork(e.target.value)} value={selectedNetwork}>
+    <div className="card mt-5 card-bg-color text-white" data-bs-theme="dark">
+    <div className="card-body">
+      <div className="mb-3">
+        <label htmlFor="selectNetwork" className="form-label">Select Network:</label>
+        <select className="form-select" onChange={(e) => setSelectedNetwork(e.target.value)} value={selectedNetwork}>
           <option value="mainnet">Ethereum Mainnet</option>
           <option value="polygon">Polygon</option>
           <option value="arbitrum">Arbitrum</option>
           <option value="optimism">Optimism</option>
         </select>
-        <label>Select Token:</label>
-        <select onChange={(e) => setSelectedToken(e.target.value)} value={selectedToken}>
+      </div>
+      <div className="mb-3">
+        <label className="form-label">Select Token:</label>
+        <select className="form-select" onChange={(e) => setSelectedToken(e.target.value)} value={selectedToken}>
           <option value="usdt">USDT</option>
           <option value="usdc">USDC</option>
         </select>
-        <button onClick={handleConnectWallet} disabled={walletConnected}>
-          {walletConnected ? 'Wallet Connected' : 'Connect Wallet'}
-        </button>
-        {walletConnected && (
-          <PaymentCheck
-            selectedNetwork={selectedNetwork}
-            selectedToken={selectedToken}
-            provider={provider}
-            signer={signer}
-          />
-        )}
       </div>
+      <button className="btn manage-btn" onClick={handleConnectWallet} disabled={walletConnected}>
+        {walletConnected ? 'Wallet Connected' : 'Connect Wallet'}
+      </button>
+      {walletConnected && (
+        <PaymentCheck
+          selectedNetwork={selectedNetwork}
+          selectedToken={selectedToken}
+          provider={provider}
+          signer={signer}
+        />
+      )}
     </div>
-    </>
+  </div>
+  </div>
   );
 };
 

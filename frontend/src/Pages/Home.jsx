@@ -1,10 +1,5 @@
 const Home = () => {
     return (
-      <>
-    <div className="col-2">
-
-    </div>
-    <div className="col-8">
         <div className="card mt-5 card-bg-color text-white rounded-4">
           <div className="card-body">
             <h4 className="card-title">Cryptracker</h4>
@@ -19,8 +14,6 @@ Thank you for choosing Cryptracker, and happy investing!
             </p>
           </div>
         </div>
-        </div>
-        </>
     )
 }
 

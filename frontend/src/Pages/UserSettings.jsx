@@ -55,10 +55,7 @@ const UserSettings = () => {
 
     return (
         <>
-    <div className="col-2">
-
-    </div>
-    <div className="col-8">
+    <div className="col-10">
         <div className="card mt-5 card-bg-color text-white">
             <div className="card-header">
                 User's Settings

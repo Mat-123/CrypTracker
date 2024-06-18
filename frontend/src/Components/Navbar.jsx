@@ -37,7 +37,7 @@ const Navbar = () => {
       }, [navigate]);
 
     return (
-        <nav className="navbar navbar-expand-lg bg-dark main-bg-color" data-bs-theme="dark">
+        <nav className="navbar navbar-expand-lg bg-dark main-bg-color d-block d-md-none" data-bs-theme="dark">
             <div className="container-fluid">
                 <Link className="navbar-brand" to="/">
                     Cryptracker

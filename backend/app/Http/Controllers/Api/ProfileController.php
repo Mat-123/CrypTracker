@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use Carbon\Carbon;
 use App\Models\User;
+use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -32,36 +33,77 @@ class ProfileController extends Controller
         return response()->json(['message' => 'Settings updated successfully.']);
     }
 
-    public function updatePremiumSubscription(Request $request)
+    protected $clients;
+
+    public function __construct()
     {
-        $userId = Auth::id(); // Recupera l'ID dell'utente autenticato
+        // Definire i client per le diverse reti
+        $this->clients = [
+            'mainnet' => new Client([
+                'base_uri' => 'https://mainnet.infura.io/v3/YOUR_INFURA_PROJECT_ID',
+            ]),
+            'arbitrum' => new Client([
+                'base_uri' => 'https://arbitrum-mainnet.infura.io/v3/YOUR_INFURA_PROJECT_ID',
+            ]),
+            'optimism' => new Client([
+                'base_uri' => 'https://optimism-mainnet.infura.io/v3/YOUR_INFURA_PROJECT_ID',
+            ]),
+            'polygon' => new Client([
+                'base_uri' => 'https://polygon-mainnet.infura.io/v3/YOUR_INFURA_PROJECT_ID',
+            ]),
+        ];
+    }
 
-        // Assumiamo che tu stia ricevendo il transactionHash nel corpo della richiesta
-        $transactionHash = $request->input('transactionHash');
+    public function processPayment(Request $request)
+    {
+        $validatedData = $request->validate([
+            'txHash' => 'required|string',
+            'network' => 'required|string|in:mainnet,arbitrum,optimism,polygon',
+        ]);
 
-        // Trova l'utente per l'ID recuperato
-        $user = User::find($userId);
-
+        $user = Auth::user();
         if (!$user) {
-            return response()->json(['error' => 'User not found'], 404);
+            return response()->json(['message' => 'Unauthorized'], 401);
         }
 
-        // Verifica se l'utente ha già un ruolo premium
-        if ($user->role === 'premium') {
-            // Aggiungi un anno alla data di scadenza esistente
-            $expiryDate = Carbon::parse($user->premium_expiry)->addYear();
-        } else {
-            // Imposta la data di scadenza a un anno dalla data corrente
-            $expiryDate = Carbon::now()->addYear();
+        // Avvia il polling per verificare la transazione
+        $this->checkTransactionStatus($validatedData['txHash'], $validatedData['network'], $user);
+
+        return response()->json(['message' => 'Payment processing initiated'], 201);
+    }
+
+    protected function checkTransactionStatus($txHash, $network, $user)
+    {
+        if (!isset($this->clients[$network])) {
+            return;
         }
 
-        // Aggiorna il ruolo e la data di scadenza premium_expiry
-        $user->role = 'premium';
-        $user->premium_expiry = $expiryDate;
-        $user->transaction_hash = $transactionHash; // Aggiungi transactionHash se necessario
-        $user->save();
+        $client = $this->clients[$network];
 
-        // Invia conferma di aggiornamento al frontend
-        return response()->json(['message' => 'User role updated successfully', 'expiry_date' => $expiryDate], 200);
+        // Polling per verificare lo stato della transazione
+        while (true) {
+            sleep(10);
+
+            $response = $client->post('', [
+                'json' => [
+                    'jsonrpc' => '2.0',
+                    'method' => 'eth_getTransactionReceipt',
+                    'params' => [$txHash],
+                    'id' => uniqid(), // Genera un ID univoco per ogni richiesta
+                ]
+            ]);
+
+            $data = json_decode($response->getBody()->getContents(), true);
+
+            if (isset($data['result'])) {
+                $receipt = $data['result'];
+
+                if ($receipt['status'] === '0x1') {
+                    // Transazione confermata
+                    $user->extendPremium();
+                    break;
+                }
+            }
+        }
     }
 }

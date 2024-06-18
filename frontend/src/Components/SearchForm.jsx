@@ -88,8 +88,6 @@ function SearchForm() {
 
     return (
         <>
-            <div className="col-2"></div>
-            <div className="col-8">
                 <div className="card card-bg-color rounded-4 text-white mt-5">
                     <div className="card-body">
                         <form onSubmit={handleSubmit} className="mb-4">
@@ -109,7 +107,7 @@ function SearchForm() {
                         </form>
                     </div>
                 </div>
-                <div className="row mt-4">
+                <div className="row mt-5">
                     <div className="col-12">
                     <div className="card card-bg-color text-white rounded-4">
                         <div className="card-body">
@@ -138,7 +136,6 @@ function SearchForm() {
                         </div>
                     ))}
                 </div>
-            </div>
         </>
     );
 }

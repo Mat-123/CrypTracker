@@ -34,10 +34,6 @@ function Results() {
 
     return (
         <>
-    <div className="col-2">
-
-    </div>
-    <div className="col-8">
         <div className='mt-5'>
             <h1>Risultati della Ricerca</h1>
             <div className="results">
@@ -62,7 +58,6 @@ function Results() {
                 )}
             </div>
             <Link to="/crypto" className="btn btn-secondary mt-4">Torna alla ricerca</Link>
-        </div>
         </div>
         </>
     );

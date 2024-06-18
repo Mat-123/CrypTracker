@@ -24,6 +24,7 @@ import "../src/Style/index.css"
 import HistoricalAnalysis from './Pages/HistoricalAnalysis';
 import PremiumRoutes from './Pages/PremiumRoutes';
 import BuyPremium from './Pages/BuyPremium';
+import Sidebar from './Components/Sidebar';
 // import SolSearchResults from './Components/SolSearchResults';
 // import EthSearchResults from './Components/EthSearchResults';
 
@@ -53,7 +54,11 @@ function App() {
         <Navbar />
         <div className="App">
           <div className="container-fluid">
-            <div className="row">
+            <div className="row justify-content-evenly">
+            <div className="col-3">
+              <Sidebar />
+            </div>
+            <div className="col-xs-12 col-md-8">
                 <Routes>
                   <Route path="/" element={<Home />} />
 
@@ -82,6 +87,7 @@ function App() {
                   <Route path="/404" element={<Error404 />} />
                   <Route path="*" element={<Navigate to="/404" />} />
                 </Routes>
+                </div>
             </div>
           </div>
         </div>

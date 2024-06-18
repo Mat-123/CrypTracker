@@ -143,9 +143,6 @@ const Transactions = () => {
 
   return (
     <>
-      <div className="col-2">
-      </div>
-      <div className="col-8">
         <div className="text-white mt-5">
           <h2 className="my-3">Transactions for Crypto: {cryptoData.name} ({cryptoData.symbol})</h2>
           <div className="card card-bg-color text-white rounded-4">
@@ -204,7 +201,6 @@ const Transactions = () => {
             </ul>
           </div>
         </div>
-      </div>
     </>
   );
 };
