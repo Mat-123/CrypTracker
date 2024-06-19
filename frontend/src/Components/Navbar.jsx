@@ -90,6 +90,7 @@ const Navbar = () => {
                                 <ul className="dropdown-menu dropdown-menu-end main-bg-color">
                                     <li><Link className="dropdown-item" to="/profile">Settings</Link></li>
                                     <li><Link className="dropdown-item" aria-current="page" to="/faq">FAQ</Link></li>
+                                    <li><Link className="dropdown-item" aria-current="page" to="/contact-us">Contact Us</Link></li>
                                     <li><hr className="dropdown-divider" /></li>
                                     <li>
                                         <button

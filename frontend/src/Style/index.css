@@ -100,3 +100,7 @@ hr {
     max-height: 600px;
     position: relative;
 }  
+
+.contact-link {
+    color: #F0BB6C;
+  }

@@ -29,6 +29,7 @@ import ForgotPassword from './Pages/ForgotPassword';
 import ResetPassword from './Pages/ResetPassword';
 import AdminRoutes from './Pages/AdminRoutes';
 import AdminPanel from './Pages/AdminPanel';
+import ContactEmail from './Pages/ContactEmail';
 // import SolSearchResults from './Components/SolSearchResults';
 // import EthSearchResults from './Components/EthSearchResults';
 
@@ -78,10 +79,12 @@ function App() {
                     <Route path='/profile' element={<UserSettings />} />
                     <Route path='/faq' element={<Faq />} />
                     <Route path='/buypremium' element={<BuyPremium />} />
+                    <Route path='/contact-us' element={<ContactEmail />} />
                   </Route>
 
                   <Route element={<PremiumRoutes />}>
                   <Route path='/analysis' element={<HistoricalAnalysis />} />
+                  <Route path='/contact-us' element={<ContactEmail />} />
                   </Route>
 
                   <Route element={<AdminRoutes />}>
@@ -93,6 +96,7 @@ function App() {
                     <Route path="/register" element={<Register />} />
                     <Route path="/forgot-password" element={<ForgotPassword />} />
                     <Route path="/reset-password/:token" element={<ResetPassword />} />
+                    <Route path='/contact-us' element={<ContactEmail />} />
                   </Route>
                   
                   <Route path="/404" element={<Error404 />} />
