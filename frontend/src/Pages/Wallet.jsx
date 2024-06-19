@@ -139,7 +139,7 @@ const Wallet = () => {
         </div>
       </div>
       <div className="row mt-5">
-          <div className="text-white mt-3">
+          <div className="text-white mt-3 px-0">
             {Object.entries(cryptoQuantities).map(([id_crypto, quantity]) => (
               <div className="card card-bg-color text-white mb-3 rounded-4" key={id_crypto}>
                 <div className="card-body d-flex justify-content-between align-items-center">
