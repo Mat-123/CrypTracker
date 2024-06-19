@@ -106,4 +106,15 @@ class ProfileController extends Controller
             }
         }
     }
+
+    public function getUserStats()
+    {
+        $totalUsers = User::count();
+        $premiumUsers = User::where('role', 'premium')->count();
+
+        return response()->json([
+            'total_users' => $totalUsers,
+            'premium_users' => $premiumUsers,
+        ]);
+    }
 }

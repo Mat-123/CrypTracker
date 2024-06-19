@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import './App.css';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import axios from 'axios';
@@ -27,6 +27,8 @@ import BuyPremium from './Pages/BuyPremium';
 import Sidebar from './Components/Sidebar';
 import ForgotPassword from './Pages/ForgotPassword';
 import ResetPassword from './Pages/ResetPassword';
+import AdminRoutes from './Pages/AdminRoutes';
+import AdminPanel from './Pages/AdminPanel';
 // import SolSearchResults from './Components/SolSearchResults';
 // import EthSearchResults from './Components/EthSearchResults';
 
@@ -36,6 +38,7 @@ function App() {
   axios.defaults.withXSRFToken = true;
 
   const dispatch = useDispatch();
+  const user = useSelector((state) => state.user); 
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
@@ -62,7 +65,7 @@ function App() {
             </div>
             <div className="col-xs-12 col-md-8">
                 <Routes>
-                  <Route path="/" element={<Home />} />
+                  <Route path="/" element={<Home user={user} />} />
 
                   <Route element={<ProtectedRoutes />}>
                     <Route path="/crypto" element={<SearchForm />} />
@@ -79,6 +82,10 @@ function App() {
 
                   <Route element={<PremiumRoutes />}>
                   <Route path='/analysis' element={<HistoricalAnalysis />} />
+                  </Route>
+
+                  <Route element={<AdminRoutes />}>
+                  <Route path='/adminpanel' element={<AdminPanel />} />
                   </Route>
 
                   <Route element={<GuestRoutes />}>

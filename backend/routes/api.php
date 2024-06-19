@@ -37,3 +37,7 @@ Route::name('api.')->prefix('v1')->middleware(['auth:sanctum'])->group(function 
 Route::name('api.')->prefix('v1')->middleware(['premium'])->group(function () {
     Route::get('/analysis/{timeframe}', [HistoryController::class, 'index'])->name('analysis.index');
 });
+
+Route::name('api.')->prefix('v1')->middleware(['admin'])->group(function () {
+    Route::get('/admin/user-stats', [ProfileController::class, 'getUserStats'])->name('admin.getUserStats');
+});

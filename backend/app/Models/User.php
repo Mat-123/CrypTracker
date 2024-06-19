@@ -25,7 +25,9 @@ class User extends Authenticatable
         'email',
         'password',
         'cmc_api_key',
-        'tx_hash'
+        'tx_hash',
+        'role',
+        'premium_expiry',
     ];
 
     /**

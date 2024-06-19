@@ -1,4 +1,30 @@
+import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+import ExpiryModal from '../Components/ExpiryModal';
+
+
+
 const Home = () => {
+
+  const user = useSelector((state) => state.user);
+    const [showModal, setShowModal] = useState(false);
+    const [daysLeft, setDaysLeft] = useState(0);
+
+    useEffect(() => {
+      if (user && user.role === 'premium') {
+          const today = new Date();
+          const expiryDate = new Date(user.premium_expiry);
+          const timeDiff = expiryDate - today;
+          const daysDiff = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
+
+          if (daysDiff <= 3) {
+              setDaysLeft(daysDiff);
+              setShowModal(true);
+          }
+      }
+  }, [user]);
+
+
     return (
         <div className="card mt-5 card-bg-color text-white rounded-4">
           <div className="card-body">
@@ -13,6 +39,13 @@ Thank you for choosing Cryptracker, and happy investing!
 
             </p>
           </div>
+          {user && (
+                <ExpiryModal 
+                    show={showModal} 
+                    daysLeft={daysLeft} 
+                    onHide={() => setShowModal(false)} 
+                />
+            )}
         </div>
     )
 }
