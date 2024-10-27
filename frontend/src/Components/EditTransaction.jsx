@@ -1,7 +1,9 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useParams } from 'react-router-dom'; 
 
 const EditTransaction = ({ isOpen, onClose, transaction }) => {
+    const { id_crypto } = useParams();
     const [formData, setFormData] = useState({
         quantity: '',
         transaction_price: '',
@@ -34,7 +36,7 @@ const EditTransaction = ({ isOpen, onClose, transaction }) => {
         try {
             const dataToSend = {
                 ...formData,
-                id_crypto: transaction.id_crypto,
+                id_crypto: parseInt(id_crypto, 10),
             id: transaction.id
             };
             const response = await axios.put(`/api/v1/transaction/${transaction.id}`, dataToSend, {

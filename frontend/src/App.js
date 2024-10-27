@@ -30,6 +30,7 @@ import ResetPassword from './Pages/ResetPassword';
 import AdminRoutes from './Pages/AdminRoutes';
 import AdminPanel from './Pages/AdminPanel';
 import ContactEmail from './Pages/ContactEmail';
+import DownloadPDFPage from './Pages/DownloadPDFPage';
 // import SolSearchResults from './Components/SolSearchResults';
 // import EthSearchResults from './Components/EthSearchResults';
 
@@ -84,6 +85,7 @@ function App() {
 
                   <Route element={<PremiumRoutes />}>
                   <Route path='/analysis' element={<HistoricalAnalysis />} />
+                  <Route path='/download-report' element={<DownloadPDFPage />} />
                   <Route path='/contact-us' element={<ContactEmail />} />
                   </Route>
 

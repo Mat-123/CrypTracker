@@ -2,6 +2,7 @@ import axios from 'axios';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { LOGIN } from '../redux/actions';
+import { Link } from 'react-router-dom';
 
 const Register = () => {
     const dispatch = useDispatch();
@@ -116,6 +117,7 @@ const Register = () => {
                 Register
             </button>
         </form>
+        <div className='mt-3'> Already registered? <Link className='link-light' to="/login">Log in</Link></div>
         </div>
         </div>
         </div>

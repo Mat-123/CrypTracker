@@ -55,6 +55,7 @@ const HistoricalAnalysis = ({ userId }) => {
       formattedData.push({
         label: 'Total Wallet',
         data: Object.entries(totalData).map(([date, price]) => ({ x: Number(date), y: price }))
+        .sort((a, b) => a.x - b.x)
       });
     }
 

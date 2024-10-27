@@ -112,7 +112,7 @@ const Transactions = () => {
     const holdings = totalBuyQuantity - totalSellQuantity;
     const lastValue = cryptoData.last_value ? parseFloat(cryptoData.last_value) : 0;
     const holdingsValue = holdings * lastValue;
-    const unrealizedPnl = holdingsValue - totalSpent;
+    const unrealizedPnl = holdingsValue === 0 ? totalSpent : holdingsValue - totalSpent;
     const totalPnl = realizedPnl + unrealizedPnl;
     const averageNetCost = totalBuyQuantity > 0 ? totalSpent / totalBuyQuantity : null;
 

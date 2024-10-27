@@ -16,7 +16,8 @@ function Results() {
         try {
             const response = await axios.post('/api/v1/wallet', {
                 id_crypto: crypto.id_crypto,
-                name_crypto: crypto.name_crypto
+                name_crypto: crypto.name_crypto,
+                symbol: crypto.symbol
             }, {
                 headers: {
                     'X-CSRF-TOKEN': window.csrfToken

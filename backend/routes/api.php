@@ -36,6 +36,8 @@ Route::name('api.')->prefix('v1')->middleware(['auth:sanctum'])->group(function 
 
 Route::name('api.')->prefix('v1')->middleware(['premium'])->group(function () {
     Route::get('/analysis/{timeframe}', [HistoryController::class, 'index'])->name('analysis.index');
+    // Route::get('/transaction/years', [TransactionController::class, 'getTransactionYears'])->name('transaction.getTransactionYears');
+    // Route::get('/transaction/download-pdf', [TransactionController::class, 'downloadPDF'])->name('transaction.downloadPDF');
 });
 
 Route::name('api.')->prefix('v1')->middleware(['admin'])->group(function () {

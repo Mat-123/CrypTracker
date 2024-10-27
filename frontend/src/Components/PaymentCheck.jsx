@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { BrowserProvider, Contract, parseUnits } from 'ethers';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
@@ -9,7 +9,7 @@ const PaymentCheck = ({ selectedNetwork, selectedToken, provider, signer }) => {
   const [registeringPayment, setRegisteringPayment] = useState(false);
   const navigate = useNavigate();
 
-  const contractAddress = '0xYourSmartContractAddress';
+  const contractAddress = '0x14C7B4F3676C5C5c49856Fe383a1b42C250Df4Df';
 
   const handleTransaction = async () => {
     if (!signer) return;

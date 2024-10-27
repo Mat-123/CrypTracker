@@ -3,11 +3,13 @@
 namespace App\Http\Controllers\Api;
 
 use App\Models\Transaction;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StoreTransactionRequest;
 use App\Http\Requests\UpdateTransactionRequest;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class TransactionController extends Controller
 {
@@ -136,4 +138,24 @@ class TransactionController extends Controller
 
         return response()->json($formattedResponse);
     }
+
+    // public function getTransactionYears()
+    // {
+    //     $years = Transaction::selectRaw('YEAR(created_at) as year')
+    //         ->distinct()
+    //         ->orderBy('year', 'desc')
+    //         ->pluck('year');
+
+    //     return response()->json($years);
+    // }
+
+    // public function downloadPDF(Request $request)
+    // {
+    //     $year = $request->input('year');
+    //     $transactions = Transaction::whereYear('created_at', $year)->get();
+
+    //     $pdf = Pdf::loadView('transactions.report', compact('transactions', 'year'));
+
+    //     return $pdf->download("transactions_report_$year.pdf");
+    // }
 }
