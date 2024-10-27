@@ -1,6 +1,6 @@
-# Cryptracker
+# CrypTracker
 
-Cryptracker è un'applicazione full-stack sviluppata come progetto Capstone nell'ultimo mese del corso Full Stack Developer con Epicode. Questo progetto consente agli utenti di monitorare i propri investimenti in criptovalute e offre funzionalità avanzate per utenti premium e amministratori, sfruttando tecnologie come Laravel per il backend e React per il frontend.
+CrypTracker è un'applicazione full-stack sviluppata come progetto Capstone nell'ultimo mese del corso Full Stack Developer con Epicode. Questo progetto consente agli utenti di monitorare i propri investimenti in criptovalute e offre funzionalità avanzate per utenti premium e amministratori, sfruttando tecnologie come Laravel per il backend e React per il frontend.
 
 ### Caratteristiche Principali
 
@@ -10,7 +10,7 @@ Cryptracker è un'applicazione full-stack sviluppata come progetto Capstone nell
 - **Admin:** Ha accesso a statistiche globali come il numero e la tipologia di utenti, con funzionalità avanzate per la gestione dell’applicazione.
 
 #### Integrazione Blockchain e Smart Contract
-Il backend di Cryptracker è integrato con uno smart contract distribuito sulla rete Ethereum Layer 2 (Arbitrum). Questo contratto gestisce le transazioni di upgrade per gli utenti premium. Una volta effettuato il pagamento, un servizio di polling lato backend verifica lo stato della transazione e attiva l’abbonamento premium per l’utente per una durata di un anno.  
+Il backend di CrypTracker è integrato con uno smart contract distribuito sulla rete Ethereum Layer 2 (Arbitrum). Questo contratto gestisce le transazioni di upgrade per gli utenti premium. Una volta effettuato il pagamento, un servizio di polling lato backend verifica lo stato della transazione e attiva l’abbonamento premium per l’utente per una durata di un anno.  
 **Link allo Smart Contract:** [Visualizza il codice su Arbiscan](https://arbiscan.io/address/0x0d458981a1d373ae24376d69a75d39b87ad6ce54#code)
 
 ### Tecnologie e Architettura
